@@ -1,0 +1,12 @@
+﻿  Test.cpp
+c:\users\s274502\documents\visual studio 2015\projects\compmethod\compmethod\test.cpp(23): error C2259: 'Analytic': cannot instantiate abstract class
+  c:\users\s274502\documents\visual studio 2015\projects\compmethod\compmethod\test.cpp(23): note: due to following members:
+  c:\users\s274502\documents\visual studio 2015\projects\compmethod\compmethod\test.cpp(23): note: 'Matrix Solver::computeSolution(double,double,double,double,double,double) const': is abstract
+  c:\users\s274502\documents\visual studio 2015\projects\compmethod\compmethod\solver.h(13): note: see declaration of 'Solver::computeSolution'
+  Solver.cpp
+  Analytic.cpp
+c:\users\s274502\documents\visual studio 2015\projects\compmethod\compmethod\analytic.cpp(10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\s274502\documents\visual studio 2015\projects\compmethod\compmethod\analytic.cpp(11): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\s274502\documents\visual studio 2015\projects\compmethod\compmethod\analytic.cpp(13): warning C4804: '<': unsafe use of type 'bool' in operation
+c:\users\s274502\documents\visual studio 2015\projects\compmethod\compmethod\analytic.cpp(13): error C2143: syntax error: missing ';' before ')'
+  Generating Code...
