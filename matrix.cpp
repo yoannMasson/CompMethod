@@ -1,5 +1,6 @@
 
 #include "matrix.h"
+#include <math.h>    
 
 // CONSTRUCTORS
 /*=
@@ -14,7 +15,7 @@ Matrix::Matrix(int Nrows, int Ncols) : std::vector<std::vector<double> >()
 {
     //check input
     if(Nrows < 0 || Ncols < 0) throw std::invalid_argument("matrix size negative");
-    
+
 	// set the size for the rows
 	(*this).resize(Nrows);
 	// set the size for the columns
@@ -143,7 +144,7 @@ Matrix Matrix::operator*(const Matrix& a) const {
 
 	int nrows = getNrows();
 	int ncols = getNcols();
-	
+
 	// catch invalid matrices
 	if (nrows <= 0 || ncols <= 0) { throw std::out_of_range("Matrix access error"); }
 	if (a.getNrows() <= 0 || a.getNcols() <= 0) { throw std::out_of_range("Matrix access error"); }
@@ -238,7 +239,7 @@ Matrix Matrix::transpose() const
  * keyboard input , user friendly
  */
 std::istream& operator>>(std::istream& is, Matrix& m) {
-	
+
 	int nrows, ncols;
 
 	// test to see whether the matrix m is empty
@@ -247,7 +248,7 @@ std::istream& operator>>(std::istream& is, Matrix& m) {
 		is >> nrows;
 		std::cout << "input the number of cols for the matrix" << std::endl;
 		is >> ncols;
-		//check input 
+		//check input
 		if(nrows < 0 || ncols < 0) throw std::invalid_argument("read error - negative matrix size");
 
 		// prepare the matrix to hold n elements
@@ -262,7 +263,7 @@ std::istream& operator>>(std::istream& is, Matrix& m) {
     return is;
 }
 
-/* 
+/*
  * screen output, user friendly
  */
 std::ostream& operator<<(std::ostream& os, const Matrix& m) {
@@ -289,7 +290,7 @@ std::ostream& operator<<(std::ostream& os, const Matrix& m) {
 * file input - raw data, compatible with file writing operator
 */
 std::ifstream& operator>>(std::ifstream& ifs, Matrix& m) {
-	
+
 	int nrows, ncols;
 
     // read size from the file
@@ -301,7 +302,7 @@ std::ifstream& operator>>(std::ifstream& ifs, Matrix& m) {
     m = Matrix(nrows, ncols);
 
     // input the elements
-    for (int i=0; i<nrows; i++) 
+    for (int i=0; i<nrows; i++)
 		for (int j=0; j<ncols; j++) ifs >> m[i][j];
 
     // return the stream object
@@ -324,4 +325,3 @@ std::ofstream& operator<<(std::ofstream& ofs, const Matrix& m) {
 	}
     return ofs;
 }
-

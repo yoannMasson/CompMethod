@@ -1,5 +1,6 @@
 #include "vector.h"
-
+#include <math.h>
+#include <cstdlib>
 // CONSTRUCTORS
 /*=
 * Default constructor (empty vector)
@@ -28,7 +29,7 @@ Vector::Vector(const Vector& copy) : std::vector<double>()
 	(*this).resize(copy.size());
     // copy the data members (if vector is empty then num==0)
 	std::size_t i;
-    for (i=0; i<copy.size(); i++) (*this)[i]=copy[i]; 
+    for (i=0; i<copy.size(); i++) (*this)[i]=copy[i];
 }
 
 /*
@@ -47,7 +48,7 @@ Vector& Vector::operator=(const Vector& copy)
 {
 	(*this).resize(copy.size());
 	std::size_t i;
-    for (i=0; i<copy.size(); i++) (*this)[i] = copy[i]; 
+    for (i=0; i<copy.size(); i++) (*this)[i] = copy[i];
     return *this;
 }
 
@@ -139,7 +140,7 @@ std::istream& operator>>(std::istream& is, Vector& v)
 /*
 * file input - raw data, compatible with file writing operator
 */
-std::ifstream& operator>>(std::ifstream& ifs, Vector& v) 
+std::ifstream& operator>>(std::ifstream& ifs, Vector& v)
 {
     int n;
 
@@ -188,5 +189,3 @@ std::ofstream& operator<<(std::ofstream& ofs, const Vector& v)
     ofs << std::endl;
     return ofs;
 }
-
-

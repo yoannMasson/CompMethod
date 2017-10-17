@@ -6,11 +6,11 @@ Analytic::Analytic(): Solver(){}
 
 Matrix Analytic::computeSolution(double dt, double dx, double D, double Tsur, double Tin)
 {
-	
+
 	int timeLimit (0.5 / 0.01);
 	int matrixLimit = (1 / 0.05);
 	Matrix m = (*this).getComputedSolution();
-	for (int i = 0; i < matrixLimit < i++) {
+	for (int i = 0; i < matrixLimit ; i++) {
 		m[0][i] = 100;
 	}
 	for (int i = 1; i < timeLimit; i++) {
@@ -21,7 +21,3 @@ Matrix Analytic::computeSolution(double dt, double dx, double D, double Tsur, do
 		}
 	}
 }
-
-
-
-

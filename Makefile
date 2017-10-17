@@ -8,10 +8,13 @@ vector.o: vector.cpp
 	g++ -c vector.cpp
 
 Analytic.o: Analytic.cpp
-	g++ -c analytic.cpp
+	g++ -c Analytic.cpp
 
 Solver.o: Solver.cpp
 	g++ -c Solver.cpp
 
 Test.o: Test.cpp
 	g++ -c Test.cpp
+
+clean:
+	rm -rf *.o
