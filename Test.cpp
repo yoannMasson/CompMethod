@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Analytic.h"
+#include <cstdlib>
 
 using namespace std;
 int main() {
@@ -20,7 +21,7 @@ int main() {
 	case '4':
 		break;
 	case '5':
-		Analytic analytic();
+		Analytic analytic;
 
 		break;
 	}

@@ -4,8 +4,7 @@
 
 Analytic::Analytic(): Solver(){}
 
-Matrix Analytic::computeSolution(double dt, double dx, double D, double Tsur, double Tin)
-{
+Matrix Analytic::computeSolution(double dt, double dx, double D, double Tsur, double Tin){
 
 	int timeLimit (0.5 / 0.01);
 	int matrixLimit = (1 / 0.05);
