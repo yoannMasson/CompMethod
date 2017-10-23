@@ -3,5 +3,6 @@
 class Analytic :public Solver {
 public:
 	Analytic();
-  virtual Matrix computeSolution(double dt, double dx, double D, double Tsur, double Tin);
+	Matrix computeSolution(double dt, double dx, double D, double Tsur, double Tin);
+	~Analytic(){}
 };

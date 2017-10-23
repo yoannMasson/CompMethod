@@ -12,3 +12,4 @@ Solver::Solver() {
 Matrix Solver::getComputedSolution() {
 	return (*this).computedSolution;
 }
+
