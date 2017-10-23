@@ -22,7 +22,9 @@ int main() {
 		break;
 	case '5':
 		Analytic analytic;
-
+		cout << "ere";
+		cout << analytic.computeSolution(0.05,0.1,0.1,300.0,100.0);
+		cout << "lol ";
 		break;
 	}
 	system("pause");

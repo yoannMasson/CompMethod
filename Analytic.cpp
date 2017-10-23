@@ -4,11 +4,11 @@
 
 Analytic::Analytic(): Solver(){}
 
-Matrix Solver::computeSolution(double dt, double dx, double D, double Tsur, double Tin){
+Matrix Analytic::computeSolution(double dt, double dx, double D, double Tsur, double Tin){
 
 	int timeLimit (0.5 / 0.01);
 	int matrixLimit = (1 / 0.05);
-	Matrix m = (*this).getComputedSolution();
+	Matrix m = getComputedSolution();
 	for (int i = 0; i < matrixLimit ; i++) {
 		m[0][i] = 100;
 	}
