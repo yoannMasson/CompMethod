@@ -2,11 +2,12 @@
 
 class Solver{
 
-private:
+protected:
 	Matrix computedSolution;
 
 public:
 	Solver(Matrix m);
+	Solver(int nRows, int nCols);
 	Solver();
 
 	Matrix getComputedSolution();
