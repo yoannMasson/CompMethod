@@ -1,16 +1,29 @@
+#ifndef SOLVER_H_
+#define SOLVER_H_
+
 #include "matrix.h"
 
 class Solver{
 
 protected:
 	Matrix computedSolution;
+	double dx;
+	double dt;
+	double L;
+	double T;
+	double D;
+	double Tsur;
+	double Tin;
+
+
 
 public:
-	Solver(Matrix m);
-	Solver(int nRows, int nCols);
-	Solver();
 
+	Solver(double dx, double dt, double L, double T, double D, double Tsur, double Tin );
 	Matrix getComputedSolution();
-	virtual Matrix computeSolution(double dt,double dx, double D, double Tsur,double Tin) = 0;
+	virtual Matrix computeSolution() = 0;
 	~Solver(){}
+
+
 };
+#endif /* Solver_h */
