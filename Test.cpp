@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Analytic.h"
 #include "Richardson.h"
+#include "Laasonen.h"
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
@@ -13,7 +14,7 @@ const double TSUR = 300.0;
 const double T = 0.5;
 const double D = 0.1;
 const double DX = 0.05;
-const double DT = 0.01;
+const double DT = 0.025;
 
 int main() {
 
@@ -30,25 +31,31 @@ int main() {
 	switch (choice) {
 	case '1':
 		break;
-	case '2':
-		{
-
+	case '2':{
 		Richardson richardson(DX,DT,THICNESS,T,D,TSUR,TIN);
-		richardson.computeSolution();
-		cout << richardson.getComputedSolution();
-		}
-		break;
-	case '3':
-		break;
+		cout << richardson.computeSolution();
+		cout << richardson;
+	}
+	break;
+	case '3':{
+		Laasonen lassonen(DX,DT,THICNESS,T,D,TSUR,TIN);
+		cout << lassonen.computeSolution();
+		cout << lassonen;
+	}
+	break;
 	case '4':
 		break;
 	case '5':
-		{
+	{
 		Analytic analytic(DX,DT,THICNESS,T,D,TSUR,TIN);
 		analytic.computeSolution();
+		Richardson richardson(DX,DT,THICNESS,T,D,TSUR,TIN);
+		richardson.computeSolution();
 		cout << analytic.getComputedSolution();
-		}
-		break;
+		cout << richardson.getComputedSolution();
+		cout << analytic.getComputedSolution() - richardson.getComputedSolution();
+	}
+	break;
 
 	}
 	return 0;

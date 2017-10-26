@@ -135,6 +135,20 @@ public:
 		) const;
 
 	/**
+	* Overloaded -operator that returns a Matrix.
+	* It Performs matrix by matrix substraction.
+	* @see operator-(const Matrix & a) const
+	* @exception out_of_range ("Matrix access error")
+	* One or more of the matrix have a zero size
+	* @exception std::out_of_range ("uncompatible matrix sizes")
+	* Number of columns/rows in first matrix do not match number of columns or/and rows in second matrix
+	* @return Matrix. matrix-matrix product
+	*/
+	//
+	Matrix operator-(const Matrix & a /**< Matrix. matrix to multiply by */
+		) const;
+
+	/**
 	* Overloaded *operator that returns a Vector.
 	* It Performs matrix by vector multiplication.
 	* @see operator*(const Matrix & a)const

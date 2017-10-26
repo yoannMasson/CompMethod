@@ -166,6 +166,32 @@ Matrix Matrix::operator*(const Matrix& a) const {
 	return mmult;
 }
 
+/*
+* Operator- substraction of a matrix by a matrix
+*/
+Matrix Matrix::operator-(const Matrix& a) const {
+
+	int nrows = getNrows();
+	int ncols = getNcols();
+
+	// catch invalid matrices
+	if (nrows <= 0 || ncols <= 0) { throw std::out_of_range("Matrix access error"); }
+	if (a.getNrows() <= 0 || a.getNcols() <= 0) { throw std::out_of_range("Matrix access error"); }
+
+	//if the matrix sizes do not match
+	if (ncols != a.getNcols() || nrows != a.getNrows()) throw std::out_of_range("matrix sizes do not match");
+
+	//  matrix to store the result
+	Matrix msubstract = Matrix(nrows,ncols);
+
+	//matrix multiplication
+	for (int i = 0;i<nrows;i++) {
+		for (int j = 0;j<a.getNcols();j++) {
+			msubstract[i][j] += (*this)[i][j] - a[i][j];
+		}
+	}
+	return msubstract;
+}
 
 /*
 * Operator* multiplication of a matrix by a vector
