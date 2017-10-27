@@ -1,5 +1,5 @@
-all: matrix.o vector.o Analytic.o Solver.o Richardson.o Test.o Laasonen.o
-	g++ matrix.o vector.o Analytic.o Solver.o Richardson.o Test.o Laasonen.o -o test
+all: matrix.o vector.o Analytic.o Solver.o Richardson.o Test.o Laasonen.o DufortFrankel.o
+	g++ matrix.o vector.o Analytic.o Solver.o Richardson.o Test.o Laasonen.o DufortFrankel.o -o test
 
 matrix.o: matrix.cpp
 	g++ -c matrix.cpp
@@ -21,6 +21,9 @@ Test.o: Test.cpp
 
 Laasonen.o: Laasonen.cpp
 	g++ -c Laasonen.cpp
+	
+DufortFrankel.o: DufortFrankel.cpp
+	g++ -c DufortFrankel.cpp
 	
 clean:
 	rm -rf *.o

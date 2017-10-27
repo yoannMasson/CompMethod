@@ -2,6 +2,7 @@
 #include "Analytic.h"
 #include "Richardson.h"
 #include "Laasonen.h"
+#include "DufortFrankel.h"
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
@@ -14,7 +15,7 @@ const double TSUR = 300.0;
 const double T = 0.5;
 const double D = 0.1;
 const double DX = 0.05;
-const double DT = 0.025;
+const double DT = 0.01;
 
 int main() {
 
@@ -29,8 +30,12 @@ int main() {
 	}
 
 	switch (choice) {
-	case '1':
-		break;
+	case '1':{
+		DufortFrankel dufortFrankel(DX,DT,THICNESS,T,D,TSUR,TIN);
+		cout << dufortFrankel.computeSolution();
+		cout << dufortFrankel;
+	}
+	break;
 	case '2':{
 		Richardson richardson(DX,DT,THICNESS,T,D,TSUR,TIN);
 		cout << richardson.computeSolution();
@@ -54,6 +59,8 @@ int main() {
 		cout << analytic.getComputedSolution();
 		cout << richardson.getComputedSolution();
 		cout << analytic.getComputedSolution() - richardson.getComputedSolution();
+		FILE* f = fopen("plot","w");
+
 	}
 	break;
 
