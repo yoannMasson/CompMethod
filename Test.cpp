@@ -20,8 +20,8 @@ const double DT = 0.01;
 int main() {
 
 
-	cout << fixed;
-	cout << setprecision(2);
+	//cout << fixed;
+	//cout << setprecision(2);
 	char choice('0');
 	while (choice != '1' && choice != '2' && choice != '3' && choice != '4' && choice != '5'){
 		cout << "Please chose the method to compute the problem: " << endl << "1. Dufort-Frankel" << endl << "2. Richardson" << endl << "3. Laasonen" << endl << "4. Crank-Nicholson" << endl << "5. Analytic solution" << endl;
@@ -43,23 +43,31 @@ int main() {
 	}
 	break;
 	case '3':{
-		Laasonen lassonen(DX,DT,THICNESS,T,D,TSUR,TIN);
-		cout << lassonen.computeSolution();
-		cout << lassonen;
+		Laasonen laasonen(DX,DT,THICNESS,T,D,TSUR,TIN);
+		cout << laasonen.computeSolution();
+		cout << laasonen;
 	}
 	break;
-	case '4':
-		break;
+	case '4':{
+		Laasonen laasonen(DX,DT,THICNESS,T,D,TSUR,TIN);
+		DufortFrankel dufortFrankel(DX,DT,THICNESS,T,D,TSUR,TIN);
+		laasonen.computeSolution();
+		dufortFrankel.computeSolution();
+		cout << laasonen.getComputedSolution() - dufortFrankel.getComputedSolution();
+	}
+	break;
 	case '5':
 	{
 		Analytic analytic(DX,DT,THICNESS,T,D,TSUR,TIN);
 		analytic.computeSolution();
-		Richardson richardson(DX,DT,THICNESS,T,D,TSUR,TIN);
-		richardson.computeSolution();
-		cout << analytic.getComputedSolution();
-		cout << richardson.getComputedSolution();
-		cout << analytic.getComputedSolution() - richardson.getComputedSolution();
-		FILE* f = fopen("plot","w");
+		cout << analytic;
+
+		ofstream f;
+		f << fixed;
+		f << setprecision(2);
+		f.open ("plot");
+		f << analytic;
+		f.close();
 
 	}
 	break;

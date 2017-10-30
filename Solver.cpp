@@ -64,18 +64,24 @@ std::ostream& operator<<(std::ostream& os, Solver& s) {
 std::ofstream& operator<<(std::ofstream& ofs, Solver& s) {
 
 	Matrix m = s.getComputedSolution();
-	int i =0;
+	int i,j =0;
+	double x = 0.0;
+	double L = s.getL();
 	if (m.getNrows() > 0) {
-		for(double x=0; x<= s.getL() ; x += s.getDX()){
+		for(int k=0;k<=20;k++){
+			x = k*0.05;
 			ofs << x  << " ";
-			for(double t = 0; t <= s.getT(); t += s.getDT()){
-				if(fmod(t,0.1) == 0){//Meaning that t={0.0;0.1;0.2;0.3;0.4;0.5}
-					i = t/s.getDT();
-					ofs << m[t][x]  << " ";
-				}
+			for(double t = 0.0; t <= s.getT(); t += 0.1){
+				std::cout << t << std::endl;
+				i = t/s.getDT();
+				j = x/s.getDX();
+				ofs << m[i][j]  << " ";
+
 			}
 			ofs << std::endl;
+			x += 0.05;
 		}
 	}
+
 	return ofs;
 }
