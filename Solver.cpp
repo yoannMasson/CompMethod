@@ -72,7 +72,7 @@ std::ofstream& operator<<(std::ofstream& ofs, Solver& s) {
 			x = k*0.05;
 			ofs << x  << " ";
 			for(double t = 0.0; t <= s.getT(); t += 0.1){
-				std::cout << t << std::endl;
+
 				i = t/s.getDT();
 				j = x/s.getDX();
 				ofs << m[i][j]  << " ";

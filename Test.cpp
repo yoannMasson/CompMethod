@@ -3,6 +3,7 @@
 #include "Richardson.h"
 #include "Laasonen.h"
 #include "DufortFrankel.h"
+#include "CrankNicholson.h"
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
@@ -20,8 +21,8 @@ const double DT = 0.01;
 int main() {
 
 
-	//cout << fixed;
-	//cout << setprecision(2);
+	cout << fixed;
+	cout << setprecision(2);
 	char choice('0');
 	while (choice != '1' && choice != '2' && choice != '3' && choice != '4' && choice != '5'){
 		cout << "Please chose the method to compute the problem: " << endl << "1. Dufort-Frankel" << endl << "2. Richardson" << endl << "3. Laasonen" << endl << "4. Crank-Nicholson" << endl << "5. Analytic solution" << endl;
@@ -49,18 +50,16 @@ int main() {
 	}
 	break;
 	case '4':{
-		Laasonen laasonen(DX,DT,THICNESS,T,D,TSUR,TIN);
-		DufortFrankel dufortFrankel(DX,DT,THICNESS,T,D,TSUR,TIN);
-		laasonen.computeSolution();
-		dufortFrankel.computeSolution();
-		cout << laasonen.getComputedSolution() - dufortFrankel.getComputedSolution();
+		CrankNicholson crankNicholson(DX,DT,THICNESS,T,D,TSUR,TIN);
+		crankNicholson.computeSolution();
+		cout << crankNicholson;
 	}
 	break;
 	case '5':
 	{
 		Analytic analytic(DX,DT,THICNESS,T,D,TSUR,TIN);
 		analytic.computeSolution();
-		cout << analytic;
+		cout << analytic.getComputedSolution();
 
 		ofstream f;
 		f << fixed;
