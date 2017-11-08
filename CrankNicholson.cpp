@@ -60,7 +60,8 @@ Matrix CrankNicholson::computeSolution(){
 	std::cout << resolveOneStep(bottomDiagonal,diagonal,upDiagonal,resultVector,f);
 	//Calcul
 	for (int timeStep = 0; timeStep < nRows-1; timeStep++) {
-
+		f = resolveOneStep(bottomDiagonal,diagonal,upDiagonal,resultVector,f);
+		cout << f;
 	}
 	(*this).computedSolution = m;
 	return m;
@@ -85,16 +86,16 @@ Vector CrankNicholson::resolveOneStep(Vector bottomDiagonal,
 		tempRes[i] = (resultDiagonal[i]-bottomDiagonal[i]*tempRes[i-1])/(diagonal[i]-bottomDiagonal[i]*tempUp[i-1]);
 	}
 	tempRes[(L/dx)-1] = resultDiagonal[(L/dx)-1];
-	cout << "result Diagonal" << resultDiagonal;
+/*	cout << "result Diagonal" << resultDiagonal;
 	cout << "f diagonal" << f;
 	cout << "top diagonal" << upDiagonal;
 	cout << "bottom diagonal" << bottomDiagonal;
 	cout << "Diagonal" << diagonal;
 	cout << "tempUp: " << tempUp;
-	cout << "tempRes: " << tempRes;
+	cout << "tempRes: " << tempRes;*/
 	//reverse resolving the system
 	f[(L/dx-1)] = tempRes[(L/dx-1)];
-	for(int i = (L/dx)-2;i >= 0;i--){
+	for(int i = (L/dx)-2;i > 0;i--){
 		f[i] = tempRes[i]-tempUp[i]*f[i+1];
 	}
 
