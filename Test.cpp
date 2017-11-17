@@ -59,7 +59,7 @@ int main() {
 	{
 		Analytic analytic(DX,DT,THICNESS,T,D,TSUR,TIN);
 		analytic.computeSolution();
-		cout << analytic.getComputedSolution();
+		cout << analytic;
 
 		ofstream f;
 		f << fixed;

@@ -51,22 +51,29 @@ Matrix CrankNicholson::computeSolution(){
 		f[j] = m[0][j];
 	}
 
-	//Filling resultVector with init values
-	f[0] = 300;
-	f[nCols-1] = 300;
-	for(int i = 1 ; i < nCols-1 ; i++){
-		resultVector[i] = C*f[i+1]+(1-2*C)*f[i]+C*f[i-1];
-	}
+
 	resultVector[0] =  C*f[1]+(1-2*C)*f[0]+C*Tsur;
 	resultVector[nCols -1] =  C*Tsur+(1-2*C)*f[nCols -1]+C*f[nCols -2];
-	std::cout << resolveOneStep(bottomDiagonal,diagonal,upDiagonal,resultVector,f);
 	//Calcul
-	/*for (int timeStep = 0; timeStep < nRows-1; timeStep++) {
-		f = resolveOneStep(bottomDiagonal,diagonal,upDiagonal,resultVector,f);
-		for(int i = 0; i < nCols ; i++){
-			m[1][i] = f[i];
+	for (int timeStep = 1; timeStep < nRows; timeStep++) {
+
+		//Filling resultVector with init values
+		f[0] = Tsur;
+		f[nCols-1] = Tsur;
+		for(int i = 1 ; i < nCols-1 ; i++){
+			resultVector[i] = C*f[i+1]+(1-2*C)*f[i]+C*f[i-1];
 		}
-	}*/
+
+		f = resolveOneStep(bottomDiagonal,diagonal,upDiagonal,resultVector,f);
+
+		//We maintain the temperature at the border
+		f[0] = Tsur;
+		f[nCols-1] = Tsur;
+
+		for(int i = 0; i < nCols ; i++){
+			m[timeStep][i] = f[i];
+		}
+	}
 
 	(*this).computedSolution = m;
 	return m;
