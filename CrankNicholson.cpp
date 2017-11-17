@@ -18,8 +18,8 @@ Matrix CrankNicholson::computeSolution(){
 	Matrix m = getComputedSolution();//Matrix containing the result
 	int nRows = m.getNrows();
 	int nCols = m.getNcols();
-	Vector bottomDiagonal(nCols-1);//The upper diagonal of the triangle matrix A of the system A.F = D
-	Vector upDiagonal(nCols-1);//The upper diagonal of the triangle matrix A of the system A.F = D
+	Vector bottomDiagonal(nCols);//The upper diagonal of the triangle matrix A of the system A.F = D
+	Vector upDiagonal(nCols);//The upper diagonal of the triangle matrix A of the system A.F = D
 	Vector diagonal(nCols);//The main diagonal of the triangle matrix A of the system A.F = D
 	Vector resultVector(nCols);//The D vector of the system A.F = D;
 	Vector f(nCols);//The f vector of the previus iteration
@@ -40,10 +40,12 @@ Matrix CrankNicholson::computeSolution(){
 		diagonal[i] = 1+2*C;
 	}
 
-	for(int i = 0; i< nCols-1 ; i++){
+	for(int i = 0; i< nCols ; i++){
 		upDiagonal[i] = -C;
 		bottomDiagonal[i] = -C;
 	}
+	bottomDiagonal[0] = 0;
+	upDiagonal[nCols-1] = 0;
 	//f is the fist time step at initialization
 	for(int j = 0 ; j < nCols; j++){
 		f[j] = m[0][j];
@@ -55,17 +57,17 @@ Matrix CrankNicholson::computeSolution(){
 	for(int i = 1 ; i < nCols-1 ; i++){
 		resultVector[i] = C*f[i+1]+(1-2*C)*f[i]+C*f[i-1];
 	}
-	resultVector[0] = Tsur;
-	resultVector[nCols -1] = Tsur;
+	resultVector[0] =  C*f[1]+(1-2*C)*f[0]+C*Tsur;
+	resultVector[nCols -1] =  C*Tsur+(1-2*C)*f[nCols -1]+C*f[nCols -2];
 	std::cout << resolveOneStep(bottomDiagonal,diagonal,upDiagonal,resultVector,f);
 	//Calcul
-	for (int timeStep = 0; timeStep < nRows-1; timeStep++) {
+	/*for (int timeStep = 0; timeStep < nRows-1; timeStep++) {
 		f = resolveOneStep(bottomDiagonal,diagonal,upDiagonal,resultVector,f);
 		for(int i = 0; i < nCols ; i++){
 			m[1][i] = f[i];
 		}
-	}
-	std::cout << m;
+	}*/
+
 	(*this).computedSolution = m;
 	return m;
 }
@@ -82,24 +84,28 @@ Vector CrankNicholson::resolveOneStep(Vector bottomDiagonal,
 	
 
 	tempUp[0] = upDiagonal[0]/diagonal[0];
-	tempRes[0] = Tsur;
 
-	tempRes[(L/dx)-1] = resultDiagonal[(L/dx)-1];
-	for(int i= 1 ; i < (nCols-1) ; i++){
+
+	for(int i= 1 ; i < nCols-1 ; i++){
 		tempUp[i] = upDiagonal[i]/(diagonal[i]-bottomDiagonal[i]*tempUp[i-1]);
+	}
+
+	tempRes[0] = resultDiagonal[0]/diagonal[0];
+	for(int i= 1 ; i < nCols ; i++){
 		tempRes[i] = (resultDiagonal[i]-bottomDiagonal[i]*tempRes[i-1])/(diagonal[i]-bottomDiagonal[i]*tempUp[i-1]);
 	}
-	tempRes[(nCols)-1] = resultDiagonal[(nCols)-1];
-/*	cout << "result Diagonal" << resultDiagonal;
+
+
+	cout << "result Diagonal" << resultDiagonal;
 	cout << "f diagonal" << f;
 	cout << "top diagonal" << upDiagonal;
 	cout << "bottom diagonal" << bottomDiagonal;
 	cout << "Diagonal" << diagonal;
 	cout << "tempUp: " << tempUp;
-	cout << "tempRes: " << tempRes;*/
+	cout << "tempRes: " << tempRes;
 	//reverse resolving the system
-	f[(nCols-1)] = tempRes[(nCols-1)];
-	for(int i = (nCols)-2;i > 0;i--){
+	f[nCols-1] = tempRes[nCols-1];
+	for(int i = nCols-2;i >= 0 ; i--){
 		f[i] = tempRes[i]-tempUp[i]*f[i+1];
 	}
 
