@@ -5,18 +5,18 @@
  *      Author: yoann
  */
 
-#ifndef CRANKNICHOLSON_H_
-#define CRANKNICHOLSON_H_
+#ifndef CRANKNICOLSON_H_
+#define CRANKNICOLSON_H_
 #include "Solver.h"
 #include "vector.h"
 
 using namespace std;
 
-class CrankNicholson: public Solver {
+class CrankNicolson: public Solver {
 public:
-	CrankNicholson(double dx, double dt, double L, double T, double D, double Tsur, double Tin );
+	CrankNicolson(double dx, double dt, double L, double T, double D, double Tsur, double Tin );
 	Matrix virtual computeSolution();
-	virtual ~CrankNicholson();
+	virtual ~CrankNicolson();
 private:
 	Vector resolveOneStep(Vector bottomDiagonal,
 			Vector diagonal,
@@ -25,4 +25,4 @@ private:
 			Vector &f);
 };
 
-#endif /* CRANKNICHOLSON_H_ */
+#endif /* CRANKNICOLSON_H_ */

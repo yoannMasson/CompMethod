@@ -31,14 +31,7 @@ Matrix Laasonen::computeSolution(){
 		}
 	}
 
-	//Calcul
-	for (int i = 0; i < nRows-1; i++) {
-		for (int j = 1; j < nCols-1; j++) {
-			m[i+1][j] = ((D*dt)/(dx*dx))*(m[i][j+1]-2*m[i][j]+m[i][j-1])+m[i][j];
-		}
-	}
-	(*this).computedSolution = m;
-	return m;
+
 }
 
 Laasonen::~Laasonen() {

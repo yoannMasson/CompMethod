@@ -3,10 +3,10 @@
 #include "Richardson.h"
 #include "Laasonen.h"
 #include "DufortFrankel.h"
-#include "CrankNicholson.h"
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
+#include "CrankNicolson.h"
 
 using namespace std;
 
@@ -35,36 +35,70 @@ int main() {
 		DufortFrankel dufortFrankel(DX,DT,THICNESS,T,D,TSUR,TIN);
 		cout << dufortFrankel.computeSolution();
 		cout << dufortFrankel;
+
+		ofstream f;
+		f << fixed;
+		f << setprecision(2);
+		f.open ("Dufort Frankel");
+		f << dufortFrankel;
+		f.close();
 	}
 	break;
 	case '2':{
 		Richardson richardson(DX,DT,THICNESS,T,D,TSUR,TIN);
 		cout << richardson.computeSolution();
 		cout << richardson;
+
+		ofstream f;
+		f << fixed;
+		f << setprecision(2);
+		f.open ("Richardson");
+		f << richardson;
+		f.close();
+
 	}
 	break;
 	case '3':{
 		Laasonen laasonen(DX,DT,THICNESS,T,D,TSUR,TIN);
 		cout << laasonen.computeSolution();
 		cout << laasonen;
+
+		ofstream f;
+		f << fixed;
+		f << setprecision(2);
+		f.open ("Laasonen");
+		f << laasonen;
+		f.close();
 	}
 	break;
 	case '4':{
-		CrankNicholson crankNicholson(DX,DT,THICNESS,T,D,TSUR,TIN);
+		CrankNicolson crankNicholson(DX,DT,THICNESS,T,D,TSUR,TIN);
 		crankNicholson.computeSolution();
 		cout << crankNicholson;
+
+		Analytic analytic(DX,DT,THICNESS,T,D,TSUR,TIN);
+		analytic.computeSolution();
+
+		//cout << crankNicholson.getComputedSolution() - analytic.getComputedSolution();
+		ofstream f;
+		f << fixed;
+		f << setprecision(2);
+		f.open ("CrankNicolson");
+		f << crankNicholson;
+		f.close();
 	}
 	break;
 	case '5':
 	{
 		Analytic analytic(DX,DT,THICNESS,T,D,TSUR,TIN);
 		analytic.computeSolution();
+		cout << analytic.getComputedSolution();
 		cout << analytic;
 
 		ofstream f;
 		f << fixed;
 		f << setprecision(2);
-		f.open ("plot");
+		f.open ("Analytic");
 		f << analytic;
 		f.close();
 
