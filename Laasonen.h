@@ -15,6 +15,12 @@ public:
 	Laasonen(double dx, double dt, double L, double T, double D, double Tsur, double Tin );
 	Matrix virtual computeSolution();
 	virtual ~Laasonen();
+private:
+	Vector resolveOneStep(Vector bottomDiagonal,
+				Vector diagonal,
+				Vector upDiagonal,
+				Vector resultDiagonal,
+				Vector &f);
 };
 
 #endif /* LAASONEN_H_ */

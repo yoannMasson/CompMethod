@@ -11,7 +11,7 @@
 using namespace std;
 
 CrankNicolson::CrankNicolson(double dx, double dt, double L, double T, double D, double Tsur, double Tin ):
-						Solver (dx, dt, L, T, D, Tsur, Tin){}
+								Solver (dx, dt, L, T, D, Tsur, Tin){}
 
 Matrix CrankNicolson::computeSolution(){
 
@@ -45,6 +45,9 @@ Matrix CrankNicolson::computeSolution(){
 
 	for(int i = 0; i< nCols-1 ; i++){
 		upDiagonal[i] = -C;
+	}
+
+	for(int i = 0; i< nCols-1 ; i++){
 		bottomDiagonal[i] = -C;
 	}
 
@@ -53,20 +56,12 @@ Matrix CrankNicolson::computeSolution(){
 		f[j] = Tin;
 	}
 
-	//Filling resultVector with init values
-	resultVector[0] =  C*f[1]+(1-2*C)*f[0]+C*Tsur;
-	resultVector[nCols - 1] =  C*Tsur+(1-2*C)*f[nCols-1]+C*f[nCols-2];
-	resultVector[0] += C*Tsur;
-	resultVector[nCols-1] += C*Tsur;
-	for(int i = 1 ; i < nCols-1 ; i++){
-		resultVector[i] = C*f[i+1]+(1-2*C)*f[i]+C*f[i-1];
-	}
+
 
 	//Calcul
 	for (int timeStep = 1; timeStep < nRows; timeStep++) {
 
-		resolveOneStep(bottomDiagonal,diagonal,upDiagonal,resultVector,f);
-
+		//Filling resultVector with init value
 		resultVector[0] =  C*f[1]+(1-2*C)*f[0]+C*Tsur;
 		resultVector[nCols - 1] =  C*Tsur+(1-2*C)*f[nCols - 1]+C*f[nCols - 2];
 		resultVector[0] += C*Tsur;
@@ -75,10 +70,7 @@ Matrix CrankNicolson::computeSolution(){
 			resultVector[i] = C*f[i+1]+(1-2*C)*f[i]+C*f[i-1];
 		}
 
-
-
-		cout << f;
-
+		resolveOneStep(bottomDiagonal,diagonal,upDiagonal,resultVector,f);
 
 		for(int i = 0; i < nCols ; i++){
 			m[timeStep][i+1] = f[i];
@@ -121,11 +113,11 @@ Vector CrankNicolson::resolveOneStep(Vector bottomDiagonal,
 		f[i] = tempRes[i]-tempUp[i]*f[i+1];
 	}
 
-//	cout << "bottomDiagonal: " << bottomDiagonal;
-//	cout << "diagonal: " << diagonal;
-//	cout << "upDiagonal: " << upDiagonal;
-//	cout << "resultDiagonal: " << resultDiagonal;
-//	cout << "f: " << f;
+	//	cout << "bottomDiagonal: " << bottomDiagonal;
+	//	cout << "diagonal: " << diagonal;
+	//	cout << "upDiagonal: " << upDiagonal;
+	//	cout << "resultDiagonal: " << resultDiagonal;
+	//	cout << "f: " << f;
 
 	return f;
 

@@ -63,6 +63,11 @@ int main() {
 		cout << laasonen.computeSolution();
 		cout << laasonen;
 
+		Analytic analytic(DX,DT,THICNESS,T,D,TSUR,TIN);
+		analytic.computeSolution();
+
+		cout << laasonen.getComputedSolution() - analytic.getComputedSolution();
+
 		ofstream f;
 		f << fixed;
 		f << setprecision(2);

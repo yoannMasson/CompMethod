@@ -1,9 +1,9 @@
-plot "CrankNicolson" using 1:2 title 'time = 0.0' ,\
-"CrankNicolson" using 1:3 title 'time = 0.1',\
-"CrankNicolson" using 1:4 title 'time = 0.2' ,\
-"CrankNicolson" using 1:5 title 'time = 0.3' ,\
-"CrankNicolson" using 1:6 title 'time = 0.4' ,\
-"CrankNicolson" using 1:7 title 'time = 0.5' ,\
+plot "Laasonen" using 1:2 title 'time = 0.0' ,\
+"Laasonen" using 1:3 title 'time = 0.1',\
+"Laasonen" using 1:4 title 'time = 0.2' ,\
+"Laasonen" using 1:5 title 'time = 0.3' ,\
+"Laasonen" using 1:6 title 'time = 0.4' ,\
+"Laasonen" using 1:7 title 'time = 0.5' ,\
 "Analytic" using 1:2 title 'Analytic = 0.0' with line,\
 "Analytic" using 1:3 title 'Analytic = 0.1' with line,\
 "Analytic" using 1:4 title 'Analytic = 0.2' with line,\
