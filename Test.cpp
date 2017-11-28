@@ -79,7 +79,7 @@ int main() {
 		Analytic analytic(DX,DT,THICNESS,T,D,TSUR,TIN);
 		analytic.computeSolution();
 
-		//cout << crankNicholson.getComputedSolution() - analytic.getComputedSolution();
+		cout << crankNicholson.getComputedSolution() - analytic.getComputedSolution();
 		ofstream f;
 		f << fixed;
 		f << setprecision(2);

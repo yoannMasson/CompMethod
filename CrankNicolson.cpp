@@ -56,6 +56,8 @@ Matrix CrankNicolson::computeSolution(){
 	//Filling resultVector with init values
 	resultVector[0] =  C*f[1]+(1-2*C)*f[0]+C*Tsur;
 	resultVector[nCols - 1] =  C*Tsur+(1-2*C)*f[nCols-1]+C*f[nCols-2];
+	resultVector[0] += C*Tsur;
+	resultVector[nCols-1] += C*Tsur;
 	for(int i = 1 ; i < nCols-1 ; i++){
 		resultVector[i] = C*f[i+1]+(1-2*C)*f[i]+C*f[i-1];
 	}
@@ -64,15 +66,16 @@ Matrix CrankNicolson::computeSolution(){
 	for (int timeStep = 1; timeStep < nRows; timeStep++) {
 
 		resolveOneStep(bottomDiagonal,diagonal,upDiagonal,resultVector,f);
-		resultVector = f;
+
 		resultVector[0] =  C*f[1]+(1-2*C)*f[0]+C*Tsur;
 		resultVector[nCols - 1] =  C*Tsur+(1-2*C)*f[nCols - 1]+C*f[nCols - 2];
+		resultVector[0] += C*Tsur;
+		resultVector[nCols-1] += C*Tsur;
 		for(int i = 1 ; i < nCols-1 ; i++){
 			resultVector[i] = C*f[i+1]+(1-2*C)*f[i]+C*f[i-1];
 		}
 
-		resultVector[0] += C*Tsur;
-		resultVector[nCols-1] += C*Tsur;
+
 
 		cout << f;
 
