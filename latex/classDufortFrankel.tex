@@ -1,0 +1,67 @@
+\hypertarget{classDufortFrankel}{}\section{Dufort\+Frankel Class Reference}
+\label{classDufortFrankel}\index{Dufort\+Frankel@{Dufort\+Frankel}}
+Inheritance diagram for Dufort\+Frankel\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classDufortFrankel}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDufortFrankel_ab0c732f705d9b0aa1df228670a74b651}{Dufort\+Frankel}} (double dx, double dt, double L, double T, double D, double Tsur, double Tin)
+\item 
+virtual \mbox{\hyperlink{classMatrix}{Matrix}} \mbox{\hyperlink{classDufortFrankel_aad9f0443398cd3f32b44739c1133fa94}{compute\+Solution}} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDufortFrankel_ab0c732f705d9b0aa1df228670a74b651}\label{classDufortFrankel_ab0c732f705d9b0aa1df228670a74b651}} 
+\index{Dufort\+Frankel@{Dufort\+Frankel}!Dufort\+Frankel@{Dufort\+Frankel}}
+\index{Dufort\+Frankel@{Dufort\+Frankel}!Dufort\+Frankel@{Dufort\+Frankel}}
+\subsubsection{\texorpdfstring{Dufort\+Frankel()}{DufortFrankel()}}
+{\footnotesize\ttfamily Dufort\+Frankel\+::\+Dufort\+Frankel (\begin{DoxyParamCaption}\item[{double}]{dx,  }\item[{double}]{dt,  }\item[{double}]{L,  }\item[{double}]{T,  }\item[{double}]{D,  }\item[{double}]{Tsur,  }\item[{double}]{Tin }\end{DoxyParamCaption})}
+
+Construcs a solver of the problem using Du\+Fort-\/\+Frankel method 
+\begin{DoxyParams}{Parameters}
+{\em dx} & double. distance between two space steps \\
+\hline
+{\em dt} & double. time between two time steps \\
+\hline
+{\em L} & double. width of the 1D material to consider \\
+\hline
+{\em T} & double. Total time of the considerated problem \\
+\hline
+{\em D} & double. Diffusion coefficient of the material \\
+\hline
+{\em Tsur} & double. The temperature that will be applied on the boundaries of the material \\
+\hline
+{\em Tin} & double. The initial temperature of the material \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classDufortFrankel_aad9f0443398cd3f32b44739c1133fa94}\label{classDufortFrankel_aad9f0443398cd3f32b44739c1133fa94}} 
+\index{Dufort\+Frankel@{Dufort\+Frankel}!compute\+Solution@{compute\+Solution}}
+\index{compute\+Solution@{compute\+Solution}!Dufort\+Frankel@{Dufort\+Frankel}}
+\subsubsection{\texorpdfstring{compute\+Solution()}{computeSolution()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMatrix}{Matrix}} Dufort\+Frankel\+::compute\+Solution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Compute the solution and return it. This method is the Dufort-\/\+Frankel method applied to the heat diffusion equation problem \begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classMatrix}{Matrix}}. The computed matrix, can also be accesed through \mbox{\hyperlink{classSolver_aafe88ce4130c001052e5d93c1681f90f}{get\+Computed\+Solution()}} 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classSolver_aafe88ce4130c001052e5d93c1681f90f}{get\+Computed\+Solution()}} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classSolver_a0f4ecfaed825407019995b5176e25748}{Solver}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Dufort\+Frankel.\+h\item 
+Dufort\+Frankel.\+cpp\end{DoxyCompactItemize}

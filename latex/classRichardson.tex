@@ -1,0 +1,67 @@
+\hypertarget{classRichardson}{}\section{Richardson Class Reference}
+\label{classRichardson}\index{Richardson@{Richardson}}
+Inheritance diagram for Richardson\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classRichardson}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classRichardson_a43802f7613bfd6074da2c823a6bbbb2c}{Richardson}} (double dx, double dt, double L, double T, double D, double Tsur, double Tin)
+\item 
+virtual \mbox{\hyperlink{classMatrix}{Matrix}} \mbox{\hyperlink{classRichardson_a8d2471f20a6b433cf7ccf5a4817b14a3}{compute\+Solution}} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classRichardson_a43802f7613bfd6074da2c823a6bbbb2c}\label{classRichardson_a43802f7613bfd6074da2c823a6bbbb2c}} 
+\index{Richardson@{Richardson}!Richardson@{Richardson}}
+\index{Richardson@{Richardson}!Richardson@{Richardson}}
+\subsubsection{\texorpdfstring{Richardson()}{Richardson()}}
+{\footnotesize\ttfamily Richardson\+::\+Richardson (\begin{DoxyParamCaption}\item[{double}]{dx,  }\item[{double}]{dt,  }\item[{double}]{L,  }\item[{double}]{T,  }\item[{double}]{D,  }\item[{double}]{Tsur,  }\item[{double}]{Tin }\end{DoxyParamCaption})}
+
+Construcs a solver of the problem using \mbox{\hyperlink{classRichardson}{Richardson}} method 
+\begin{DoxyParams}{Parameters}
+{\em dx} & double. distance between two space steps \\
+\hline
+{\em dt} & double. time between two time steps \\
+\hline
+{\em L} & double. width of the 1D material to consider \\
+\hline
+{\em T} & double. Total time of the considerated problem \\
+\hline
+{\em D} & double. Diffusion coefficient of the material \\
+\hline
+{\em Tsur} & double. The temperature that will be applied on the boundaries of the material \\
+\hline
+{\em Tin} & double. The initial temperature of the material \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classRichardson_a8d2471f20a6b433cf7ccf5a4817b14a3}\label{classRichardson_a8d2471f20a6b433cf7ccf5a4817b14a3}} 
+\index{Richardson@{Richardson}!compute\+Solution@{compute\+Solution}}
+\index{compute\+Solution@{compute\+Solution}!Richardson@{Richardson}}
+\subsubsection{\texorpdfstring{compute\+Solution()}{computeSolution()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMatrix}{Matrix}} Richardson\+::compute\+Solution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Compute the solution and return it. This method is the \mbox{\hyperlink{classRichardson}{Richardson}} method applied to the heat diffusion equation problem \begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classMatrix}{Matrix}}. The computed matrix, can also be accesed through \mbox{\hyperlink{classSolver_aafe88ce4130c001052e5d93c1681f90f}{get\+Computed\+Solution()}} 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classSolver_aafe88ce4130c001052e5d93c1681f90f}{get\+Computed\+Solution()}} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classSolver_a0f4ecfaed825407019995b5176e25748}{Solver}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Richardson.\+h\item 
+Richardson.\+cpp\end{DoxyCompactItemize}

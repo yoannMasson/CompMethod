@@ -37,6 +37,18 @@ double Solver::getT(){
 	return (*this).T;
 }
 
+double Solver::getD(){
+	return (*this).D;
+}
+
+double Solver::getTsur(){
+	return (*this).Tsur;
+}
+
+double Solver::getTin(){
+	return (*this).Tin;
+}
+
 std::ostream& operator<<(std::ostream& os, Solver& s) {
 
 	Matrix m = s.getComputedSolution();

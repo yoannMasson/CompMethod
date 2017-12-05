@@ -1,0 +1,238 @@
+\hypertarget{classSolver}{}\section{Solver Class Reference}
+\label{classSolver}\index{Solver@{Solver}}
+Inheritance diagram for Solver\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classSolver}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSolver_a3a1edb79e38781d40e5be114c7a549ba}{Solver}} (double dx, double dt, double L, double T, double D, double Tsur, double Tin)
+\item 
+\mbox{\hyperlink{classMatrix}{Matrix}} \mbox{\hyperlink{classSolver_aafe88ce4130c001052e5d93c1681f90f}{get\+Computed\+Solution}} ()
+\item 
+double \mbox{\hyperlink{classSolver_a560a332c3193d5709e1e5eb44bfaa322}{get\+DT}} ()
+\item 
+double \mbox{\hyperlink{classSolver_a6a05cda84ae4e3f3a187cf69f1407d81}{get\+DX}} ()
+\item 
+double \mbox{\hyperlink{classSolver_afb4f245f8c8109afb3301942d30b4544}{getL}} ()
+\item 
+double \mbox{\hyperlink{classSolver_a7a09182372f91099da1cba8b1527e4c7}{getT}} ()
+\item 
+double \mbox{\hyperlink{classSolver_a3b4da24979dd1c316c860749bbf6e3af}{getD}} ()
+\item 
+double \mbox{\hyperlink{classSolver_a652cc726a9f3e46239e3a2953e95495c}{get\+Tsur}} ()
+\item 
+double \mbox{\hyperlink{classSolver_ac091deb09ce1bb4bf2f70b6af3a2d6c2}{get\+Tin}} ()
+\item 
+virtual \mbox{\hyperlink{classMatrix}{Matrix}} \mbox{\hyperlink{classSolver_a0f4ecfaed825407019995b5176e25748}{compute\+Solution}} ()=0
+\item 
+virtual \mbox{\hyperlink{classSolver_a14f7014dd6e46e3990dea30b5ad3c087}{$\sim$\+Solver}} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classSolver_ad285fd7443e4e351a36e0374f75aae40}\label{classSolver_ad285fd7443e4e351a36e0374f75aae40}} 
+\mbox{\hyperlink{classMatrix}{Matrix}} {\bfseries computed\+Solution}
+\item 
+\mbox{\Hypertarget{classSolver_a52a573400ef79611f2b7cf28e0a101ac}\label{classSolver_a52a573400ef79611f2b7cf28e0a101ac}} 
+double {\bfseries dx}
+\item 
+\mbox{\Hypertarget{classSolver_add4f87d630ba162d042c38bbd2071a5e}\label{classSolver_add4f87d630ba162d042c38bbd2071a5e}} 
+double {\bfseries dt}
+\item 
+\mbox{\Hypertarget{classSolver_aaec7e1f0fa5c1d47cfdd3be5f46b7231}\label{classSolver_aaec7e1f0fa5c1d47cfdd3be5f46b7231}} 
+double {\bfseries L}
+\item 
+\mbox{\Hypertarget{classSolver_a145423c9810eb983e0c552de788eb6ee}\label{classSolver_a145423c9810eb983e0c552de788eb6ee}} 
+double {\bfseries T}
+\item 
+\mbox{\Hypertarget{classSolver_a07bee3fa3c48992895602311bc4efc5f}\label{classSolver_a07bee3fa3c48992895602311bc4efc5f}} 
+double {\bfseries D}
+\item 
+\mbox{\Hypertarget{classSolver_a139886772d32d2f631d55e4775361f7a}\label{classSolver_a139886772d32d2f631d55e4775361f7a}} 
+double {\bfseries Tsur}
+\item 
+\mbox{\Hypertarget{classSolver_a3e3203f9617b2de149b6b0a5490ea181}\label{classSolver_a3e3203f9617b2de149b6b0a5490ea181}} 
+double {\bfseries Tin}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \mbox{\hyperlink{classSolver_a6971051b04802402e5cbf2fda5041041}{operator$<$$<$}} (std\+::ostream \&os, \mbox{\hyperlink{classSolver}{Solver}} \&m)
+\item 
+std\+::ofstream \& \mbox{\hyperlink{classSolver_a1771538d8a3459fdfb2cc37729141e22}{operator$<$$<$}} (std\+::ofstream \&ifs, \mbox{\hyperlink{classSolver}{Solver}} \&m)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classSolver_a3a1edb79e38781d40e5be114c7a549ba}\label{classSolver_a3a1edb79e38781d40e5be114c7a549ba}} 
+\index{Solver@{Solver}!Solver@{Solver}}
+\index{Solver@{Solver}!Solver@{Solver}}
+\subsubsection{\texorpdfstring{Solver()}{Solver()}}
+{\footnotesize\ttfamily Solver\+::\+Solver (\begin{DoxyParamCaption}\item[{double}]{dx,  }\item[{double}]{dt,  }\item[{double}]{L,  }\item[{double}]{T,  }\item[{double}]{D,  }\item[{double}]{Tsur,  }\item[{double}]{Tin }\end{DoxyParamCaption})}
+
+Construcs a solver of the problem, can not be instanciated as an object since it is a virtual base class 
+\begin{DoxyParams}{Parameters}
+{\em dx} & double. distance between two space steps \\
+\hline
+{\em dt} & double. time between two time steps \\
+\hline
+{\em L} & double. width of the 1D material to consider \\
+\hline
+{\em T} & double. Total time of the considerated problem \\
+\hline
+{\em D} & double. Diffusion coefficient of the material \\
+\hline
+{\em Tsur} & double. The temperature that will be applied on the boundaries of the material \\
+\hline
+{\em Tin} & double. The initial temperature of the material \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classSolver_a14f7014dd6e46e3990dea30b5ad3c087}\label{classSolver_a14f7014dd6e46e3990dea30b5ad3c087}} 
+\index{Solver@{Solver}!````~Solver@{$\sim$\+Solver}}
+\index{````~Solver@{$\sim$\+Solver}!Solver@{Solver}}
+\subsubsection{\texorpdfstring{$\sim$\+Solver()}{~Solver()}}
+{\footnotesize\ttfamily virtual Solver\+::$\sim$\+Solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Destroys the object 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classSolver_a0f4ecfaed825407019995b5176e25748}\label{classSolver_a0f4ecfaed825407019995b5176e25748}} 
+\index{Solver@{Solver}!compute\+Solution@{compute\+Solution}}
+\index{compute\+Solution@{compute\+Solution}!Solver@{Solver}}
+\subsubsection{\texorpdfstring{compute\+Solution()}{computeSolution()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{classMatrix}{Matrix}} Solver\+::compute\+Solution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Compute the solution and return it. This method must be implemented in the child class if you want it not to be virtual \begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classMatrix}{Matrix}}. The computed matrix, can also be accesed through \mbox{\hyperlink{classSolver_aafe88ce4130c001052e5d93c1681f90f}{get\+Computed\+Solution()}} 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classSolver_aafe88ce4130c001052e5d93c1681f90f}{get\+Computed\+Solution()}} 
+\end{DoxySeeAlso}
+
+
+Implemented in \mbox{\hyperlink{classCrankNicolson_a94af3b8a56ef40966ea2ccd2629c2eb2}{Crank\+Nicolson}}, \mbox{\hyperlink{classAnalytic_aaa59a993d9c1a9b9c5b581f8f3e9c5b3}{Analytic}}, \mbox{\hyperlink{classDufortFrankel_aad9f0443398cd3f32b44739c1133fa94}{Dufort\+Frankel}}, \mbox{\hyperlink{classLaasonen_ae16757353c84d22b3a444116a64a6375}{Laasonen}}, and \mbox{\hyperlink{classRichardson_a8d2471f20a6b433cf7ccf5a4817b14a3}{Richardson}}.
+
+\mbox{\Hypertarget{classSolver_aafe88ce4130c001052e5d93c1681f90f}\label{classSolver_aafe88ce4130c001052e5d93c1681f90f}} 
+\index{Solver@{Solver}!get\+Computed\+Solution@{get\+Computed\+Solution}}
+\index{get\+Computed\+Solution@{get\+Computed\+Solution}!Solver@{Solver}}
+\subsubsection{\texorpdfstring{get\+Computed\+Solution()}{getComputedSolution()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMatrix}{Matrix}} Solver\+::get\+Computed\+Solution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Return the computed matrix, \mbox{\hyperlink{classSolver_a0f4ecfaed825407019995b5176e25748}{compute\+Solution()}} has to be called first to get the solution matrix. \begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classMatrix}{Matrix}}, the computed matrix 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classSolver_a3b4da24979dd1c316c860749bbf6e3af}\label{classSolver_a3b4da24979dd1c316c860749bbf6e3af}} 
+\index{Solver@{Solver}!getD@{getD}}
+\index{getD@{getD}!Solver@{Solver}}
+\subsubsection{\texorpdfstring{get\+D()}{getD()}}
+{\footnotesize\ttfamily double Solver\+::getD (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get the diffusion coefficient
+\begin{DoxyItemize}
+\item \begin{DoxyReturn}{Returns}
+double. the diffusion coefficient considered 
+\end{DoxyReturn}
+
+\end{DoxyItemize}\mbox{\Hypertarget{classSolver_a560a332c3193d5709e1e5eb44bfaa322}\label{classSolver_a560a332c3193d5709e1e5eb44bfaa322}} 
+\index{Solver@{Solver}!get\+DT@{get\+DT}}
+\index{get\+DT@{get\+DT}!Solver@{Solver}}
+\subsubsection{\texorpdfstring{get\+D\+T()}{getDT()}}
+{\footnotesize\ttfamily double Solver\+::get\+DT (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get the time step
+\begin{DoxyItemize}
+\item \begin{DoxyReturn}{Returns}
+double. the time step considered 
+\end{DoxyReturn}
+
+\end{DoxyItemize}\mbox{\Hypertarget{classSolver_a6a05cda84ae4e3f3a187cf69f1407d81}\label{classSolver_a6a05cda84ae4e3f3a187cf69f1407d81}} 
+\index{Solver@{Solver}!get\+DX@{get\+DX}}
+\index{get\+DX@{get\+DX}!Solver@{Solver}}
+\subsubsection{\texorpdfstring{get\+D\+X()}{getDX()}}
+{\footnotesize\ttfamily double Solver\+::get\+DX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get the space step
+\begin{DoxyItemize}
+\item \begin{DoxyReturn}{Returns}
+double. the space step considered 
+\end{DoxyReturn}
+
+\end{DoxyItemize}\mbox{\Hypertarget{classSolver_afb4f245f8c8109afb3301942d30b4544}\label{classSolver_afb4f245f8c8109afb3301942d30b4544}} 
+\index{Solver@{Solver}!getL@{getL}}
+\index{getL@{getL}!Solver@{Solver}}
+\subsubsection{\texorpdfstring{get\+L()}{getL()}}
+{\footnotesize\ttfamily double Solver\+::getL (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get the width of the material
+\begin{DoxyItemize}
+\item \begin{DoxyReturn}{Returns}
+double. the width considered 
+\end{DoxyReturn}
+
+\end{DoxyItemize}\mbox{\Hypertarget{classSolver_a7a09182372f91099da1cba8b1527e4c7}\label{classSolver_a7a09182372f91099da1cba8b1527e4c7}} 
+\index{Solver@{Solver}!getT@{getT}}
+\index{getT@{getT}!Solver@{Solver}}
+\subsubsection{\texorpdfstring{get\+T()}{getT()}}
+{\footnotesize\ttfamily double Solver\+::getT (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get the overall time
+\begin{DoxyItemize}
+\item \begin{DoxyReturn}{Returns}
+double. the overall time considered 
+\end{DoxyReturn}
+
+\end{DoxyItemize}\mbox{\Hypertarget{classSolver_ac091deb09ce1bb4bf2f70b6af3a2d6c2}\label{classSolver_ac091deb09ce1bb4bf2f70b6af3a2d6c2}} 
+\index{Solver@{Solver}!get\+Tin@{get\+Tin}}
+\index{get\+Tin@{get\+Tin}!Solver@{Solver}}
+\subsubsection{\texorpdfstring{get\+Tin()}{getTin()}}
+{\footnotesize\ttfamily double Solver\+::get\+Tin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get the initial temperature
+\begin{DoxyItemize}
+\item \begin{DoxyReturn}{Returns}
+double. the initial temperature considered 
+\end{DoxyReturn}
+
+\end{DoxyItemize}\mbox{\Hypertarget{classSolver_a652cc726a9f3e46239e3a2953e95495c}\label{classSolver_a652cc726a9f3e46239e3a2953e95495c}} 
+\index{Solver@{Solver}!get\+Tsur@{get\+Tsur}}
+\index{get\+Tsur@{get\+Tsur}!Solver@{Solver}}
+\subsubsection{\texorpdfstring{get\+Tsur()}{getTsur()}}
+{\footnotesize\ttfamily double Solver\+::get\+Tsur (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get the temperature at the surface
+\begin{DoxyItemize}
+\item \begin{DoxyReturn}{Returns}
+double. the temperature applied on the surface 
+\end{DoxyReturn}
+
+\end{DoxyItemize}
+
+\subsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classSolver_a6971051b04802402e5cbf2fda5041041}\label{classSolver_a6971051b04802402e5cbf2fda5041041}} 
+\index{Solver@{Solver}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Solver@{Solver}}
+\subsubsection{\texorpdfstring{operator$<$$<$}{operator<<}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classSolver}{Solver}} \&}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+redifinition of the $<$$<$ operator to the screen, displays the time every 0.\+1seconde from 0 to 0.\+5 seconde. \begin{DoxyReturn}{Returns}
+the generated stream 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classSolver_a1771538d8a3459fdfb2cc37729141e22}\label{classSolver_a1771538d8a3459fdfb2cc37729141e22}} 
+\index{Solver@{Solver}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Solver@{Solver}}
+\subsubsection{\texorpdfstring{operator$<$$<$}{operator<<}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily std\+::ofstream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{ifs,  }\item[{\mbox{\hyperlink{classSolver}{Solver}} \&}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+redifinition of the $<$$<$ operator to a file, displays the time every 0.\+1seconde from 0 to 0.\+5 seconde. Especially mafe for G\+N\+U\+Plot usage. \begin{DoxyReturn}{Returns}
+the generated stream 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Solver.\+h\item 
+Solver.\+cpp\end{DoxyCompactItemize}

@@ -20,7 +20,8 @@ const double DT = 0.01;
 
 int main() {
 
-
+	clock_t start, end;
+	double elapsed;
 	cout << fixed;
 	cout << setprecision(2);
 	char choice('0');
@@ -30,24 +31,51 @@ int main() {
 
 	}
 
+	Solver *solution;
+
+	solution.getComputedSolution();
+	Analytic analytic(DX,DT,THICNESS,T,D,TSUR,TIN);//Use to compute errors
+	analytic.computeSolution();
+
 	switch (choice) {
 	case '1':{
 		DufortFrankel dufortFrankel(DX,DT,THICNESS,T,D,TSUR,TIN);
+		start = clock();
 		cout << dufortFrankel.computeSolution();
+		end = clock();
+		elapsed = ((double)end - start)*1000 / CLOCKS_PER_SEC;
 		cout << dufortFrankel;
+
+		Matrix error = dufortFrankel.getComputedSolution()-analytic.getComputedSolution();
+		cout << "it took "<< elapsed << " ms to compute" << endl;
+		cout << "ERRORS: "<< endl;
+		cout << "one norm: "<< error.one_norm()<< endl;
+		cout << "second norm: "<< error.two_norm()<< endl;
+		cout << "uniform norm: "<< error.uniform_norm()<< endl;
 
 		ofstream f;
 		f << fixed;
 		f << setprecision(2);
-		f.open ("Dufort Frankel");
+		f.open ("DufortFrankel");
 		f << dufortFrankel;
 		f.close();
 	}
 	break;
 	case '2':{
 		Richardson richardson(DX,DT,THICNESS,T,D,TSUR,TIN);
+		start = clock();
 		cout << richardson.computeSolution();
+		end = clock();
+		elapsed = ((double)end - start)*1000  / CLOCKS_PER_SEC;
 		cout << richardson;
+
+		Matrix error = richardson.getComputedSolution()-analytic.getComputedSolution();
+		cout << "it took "<< elapsed << " ms to compute" << endl;
+		cout << "ERRORS: "<< endl;
+		cout << "one norm: "<< error.one_norm()<< endl;
+		cout << "second norm: "<< error.two_norm()<< endl;
+		cout << "uniform norm: "<< error.uniform_norm()<< endl;
+
 
 		ofstream f;
 		f << fixed;
@@ -60,13 +88,19 @@ int main() {
 	break;
 	case '3':{
 		Laasonen laasonen(DX,DT,THICNESS,T,D,TSUR,TIN);
-		cout << laasonen.computeSolution();
+		start = clock();
+		laasonen.computeSolution();
+		end = clock();
+		elapsed = ((double)end - start)*1000  / CLOCKS_PER_SEC;
+
+
 		cout << laasonen;
-
-		Analytic analytic(DX,DT,THICNESS,T,D,TSUR,TIN);
-		analytic.computeSolution();
-
-		cout << laasonen.getComputedSolution() - analytic.getComputedSolution();
+		Matrix error = laasonen.getComputedSolution()-analytic.getComputedSolution();
+		cout << "it took "<< elapsed << " ms to compute" << endl;
+		cout << "ERRORS: "<< endl;
+		cout << "one norm: "<< error.one_norm()<< endl;
+		cout << "second norm: "<< error.two_norm()<< endl;
+		cout << "uniform norm: "<< error.uniform_norm()<< endl;
 
 		ofstream f;
 		f << fixed;
@@ -78,13 +112,21 @@ int main() {
 	break;
 	case '4':{
 		CrankNicolson crankNicholson(DX,DT,THICNESS,T,D,TSUR,TIN);
+
+
+		start = clock();
 		crankNicholson.computeSolution();
+		end = clock();
+		elapsed = ((double)end - start)*1000  / CLOCKS_PER_SEC;
 		cout << crankNicholson;
 
-		Analytic analytic(DX,DT,THICNESS,T,D,TSUR,TIN);
-		analytic.computeSolution();
+		Matrix error = crankNicholson.getComputedSolution()-analytic.getComputedSolution();
+		cout << "it took "<< elapsed << " ms to compute" << endl;
+		cout << "ERRORS: "<< endl;
+		cout << "one norm: "<< error.one_norm()<< endl;
+		cout << "second norm: "<< error.two_norm()<< endl;
+		cout << "uniform norm: "<< error.uniform_norm()<< endl;
 
-		cout << crankNicholson.getComputedSolution() - analytic.getComputedSolution();
 		ofstream f;
 		f << fixed;
 		f << setprecision(2);
@@ -95,9 +137,6 @@ int main() {
 	break;
 	case '5':
 	{
-		Analytic analytic(DX,DT,THICNESS,T,D,TSUR,TIN);
-		analytic.computeSolution();
-		cout << analytic.getComputedSolution();
 		cout << analytic;
 
 		ofstream f;

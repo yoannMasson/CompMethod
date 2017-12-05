@@ -1,0 +1,67 @@
+\hypertarget{classLaasonen}{}\section{Laasonen Class Reference}
+\label{classLaasonen}\index{Laasonen@{Laasonen}}
+Inheritance diagram for Laasonen\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classLaasonen}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classLaasonen_a947e0e719ea5ffc3c327df1efb021c8c}{Laasonen}} (double dx, double dt, double L, double T, double D, double Tsur, double Tin)
+\item 
+virtual \mbox{\hyperlink{classMatrix}{Matrix}} \mbox{\hyperlink{classLaasonen_ae16757353c84d22b3a444116a64a6375}{compute\+Solution}} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classLaasonen_a947e0e719ea5ffc3c327df1efb021c8c}\label{classLaasonen_a947e0e719ea5ffc3c327df1efb021c8c}} 
+\index{Laasonen@{Laasonen}!Laasonen@{Laasonen}}
+\index{Laasonen@{Laasonen}!Laasonen@{Laasonen}}
+\subsubsection{\texorpdfstring{Laasonen()}{Laasonen()}}
+{\footnotesize\ttfamily Laasonen\+::\+Laasonen (\begin{DoxyParamCaption}\item[{double}]{dx,  }\item[{double}]{dt,  }\item[{double}]{L,  }\item[{double}]{T,  }\item[{double}]{D,  }\item[{double}]{Tsur,  }\item[{double}]{Tin }\end{DoxyParamCaption})}
+
+Construcs a solver of the problem using \mbox{\hyperlink{classLaasonen}{Laasonen}} method 
+\begin{DoxyParams}{Parameters}
+{\em dx} & double. distance between two space steps \\
+\hline
+{\em dt} & double. time between two time steps \\
+\hline
+{\em L} & double. width of the 1D material to consider \\
+\hline
+{\em T} & double. Total time of the considerated problem \\
+\hline
+{\em D} & double. Diffusion coefficient of the material \\
+\hline
+{\em Tsur} & double. The temperature that will be applied on the boundaries of the material \\
+\hline
+{\em Tin} & double. The initial temperature of the material \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classLaasonen_ae16757353c84d22b3a444116a64a6375}\label{classLaasonen_ae16757353c84d22b3a444116a64a6375}} 
+\index{Laasonen@{Laasonen}!compute\+Solution@{compute\+Solution}}
+\index{compute\+Solution@{compute\+Solution}!Laasonen@{Laasonen}}
+\subsubsection{\texorpdfstring{compute\+Solution()}{computeSolution()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMatrix}{Matrix}} Laasonen\+::compute\+Solution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Compute the solution and return it. This method is the \mbox{\hyperlink{classLaasonen}{Laasonen}} method applied to the heat diffusion equation problem \begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classMatrix}{Matrix}}. The computed matrix, can also be accesed through \mbox{\hyperlink{classSolver_aafe88ce4130c001052e5d93c1681f90f}{get\+Computed\+Solution()}} 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classSolver_aafe88ce4130c001052e5d93c1681f90f}{get\+Computed\+Solution()}} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classSolver_a0f4ecfaed825407019995b5176e25748}{Solver}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Laasonen.\+h\item 
+Laasonen.\+cpp\end{DoxyCompactItemize}

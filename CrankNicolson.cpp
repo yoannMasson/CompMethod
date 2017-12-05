@@ -6,12 +6,13 @@
  */
 
 #include "CrankNicolson.h"
-#include "vector.h";
+#include "vector.h"
 
 using namespace std;
 
 CrankNicolson::CrankNicolson(double dx, double dt, double L, double T, double D, double Tsur, double Tin ):
 								Solver (dx, dt, L, T, D, Tsur, Tin){}
+
 
 Matrix CrankNicolson::computeSolution(){
 

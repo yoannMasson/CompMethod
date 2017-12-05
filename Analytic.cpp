@@ -2,10 +2,11 @@
 #include <cmath>
 
 
-
+//Constructor of analytic object, calls the upper class constructor: Solver
 Analytic::Analytic(double dx, double dt, double L, double T, double D, double Tsur, double Tin ):
 Solver (dx, dt, L, T, D, Tsur, Tin){}
 
+//Computes and returns the solution, using the analytic equation
 Matrix Analytic::computeSolution(){
 
 	const double PI = 3.14159265;
@@ -30,7 +31,7 @@ Matrix Analytic::computeSolution(){
 		for (int j = 1; j < nCols-1; j++) {
 			sum = 0.0;
 			x += dx;
-			for(int z = 1; z<1000; z++){
+			for(int z = 1; z<=100 ; z++){
 				sum += exp(-D*(z*PI)*(z*PI)*t)*((1-(pow(-1,z)))/(z*PI))*sin(z*PI*x);
 			}
 			m[i][j] = Tsur+2*(Tin-Tsur)*sum;
@@ -42,5 +43,6 @@ Matrix Analytic::computeSolution(){
 	return m;
 
 }
+
 
 

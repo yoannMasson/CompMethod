@@ -168,5 +168,4 @@ public:
 		const Vector& v /**< Vector&. vector to read from */
 		);
 };
-
 #endif
