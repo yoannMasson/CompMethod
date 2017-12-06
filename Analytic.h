@@ -20,6 +20,12 @@ public:
 	//CONSTRUCTOR
 	/**
 	 * Construcs an analyic object
+	 * @exception invalid_argument ("dx should be positive")
+	 * @exception invalid_argument ("dt should be positive")
+	 * @exception invalid_argument ("L should be positive")
+	 * @exception invalid_argument ("T should be positive")
+	 * @exception invalid_argument ("L should be equal or larger than dx")
+	 * @exception invalid_argument ("T should be equal or larger than dt")
 	 */
 	Analytic(double dx/**< double. distance between two space steps */,
 			 double dt/**< double. time between two time steps */,

@@ -192,7 +192,17 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>Tin</b></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Construcs a solver of the problem using <a class="el" href="classRichardson.html">Richardson</a> method </p>
+<p>Construcs a solver of the problem using <a class="el" href="classRichardson.html">Richardson</a> method </p><dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">invalid_argument</td><td>("dx should be positive") </td></tr>
+    <tr><td class="paramname">invalid_argument</td><td>("dt should be positive") </td></tr>
+    <tr><td class="paramname">invalid_argument</td><td>("L should be positive") </td></tr>
+    <tr><td class="paramname">invalid_argument</td><td>("T should be positive") </td></tr>
+    <tr><td class="paramname">invalid_argument</td><td>("L should be equal or larger than dx") </td></tr>
+    <tr><td class="paramname">invalid_argument</td><td>("T should be equal or larger than dt") </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">dx</td><td>double. distance between two space steps </td></tr>

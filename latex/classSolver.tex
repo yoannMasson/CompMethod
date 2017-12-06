@@ -75,6 +75,21 @@ std\+::ofstream \& \mbox{\hyperlink{classSolver_a1771538d8a3459fdfb2cc37729141e2
 {\footnotesize\ttfamily Solver\+::\+Solver (\begin{DoxyParamCaption}\item[{double}]{dx,  }\item[{double}]{dt,  }\item[{double}]{L,  }\item[{double}]{T,  }\item[{double}]{D,  }\item[{double}]{Tsur,  }\item[{double}]{Tin }\end{DoxyParamCaption})}
 
 Construcs a solver of the problem, can not be instanciated as an object since it is a virtual base class 
+\begin{DoxyExceptions}{Exceptions}
+{\em invalid\+\_\+argument} & (\char`\"{}dx should be positive\char`\"{}) \\
+\hline
+{\em invalid\+\_\+argument} & (\char`\"{}dt should be positive\char`\"{}) \\
+\hline
+{\em invalid\+\_\+argument} & (\char`\"{}\+L should be positive\char`\"{}) \\
+\hline
+{\em invalid\+\_\+argument} & (\char`\"{}\+T should be positive\char`\"{}) \\
+\hline
+{\em invalid\+\_\+argument} & (\char`\"{}\+L should be equal or larger than dx\char`\"{}) \\
+\hline
+{\em invalid\+\_\+argument} & (\char`\"{}\+T should be equal or larger than dt\char`\"{}) \\
+\hline
+\end{DoxyExceptions}
+
 \begin{DoxyParams}{Parameters}
 {\em dx} & double. distance between two space steps \\
 \hline

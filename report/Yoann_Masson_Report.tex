@@ -89,7 +89,7 @@ The outcome of those results is that in this example, we don't need such a high 
 The Laasonen method is a way of solving the heat diffusion equation by computing a result step by step. The Laasonen method is part of the implicit scheme meaning that each time step not only relies on the previous one but also one the current one. When computing the result, the previous time step has already been computed but the current one will need to be solved through a linear system. Let's see the equation to get a clearer idea:
 \begin{equation}\frac{\partial T}{\partial t} = D\frac{\partial^2T }{\partial x^2}
 \end{equation} 
-\begin{equation}\frac{f\binom{n+1}{i} - f\binom{n}{i}}{\Delta t} = D\frac{f\binom{n+1}{i+1} - 2f\binom{n+1}{i}+ f\binom{n}{i}}{\Delta x^{2}}
+\begin{equation}\frac{f\binom{n+1}{i} - f\binom{n}{i}}{\Delta t} = D\frac{f\binom{n+1}{i+1} - 2f\binom{n+1}{i}+ f\binom{n+1}{i-1}}{\Delta x^{2}}
 \end{equation} 
 \begin{equation}f\binom{n}{i} = -Cf\binom{n+1}{i+1}+(1+2C)f\binom{n+1}{i}-Cf\binom{n+1}{i-1}
    \text{ with }
@@ -120,7 +120,7 @@ f\binom{n}{k}
 \end{pmatrix}
 \end{equation}
 With the above equations, we can see that we need to solve a linear system for each time step. Linear system can be really time and ressources consumming for a computer. That's why we need a good algorithm to resolve this linear system, if we take a look at the left matrix we can see that it is a diagonal matrix.\\
-A linear system with a diagonal matrix can be solved with Thomas' algorithm, which is a really good linear system solving algorithm that works with diagonal matrix, it's time complexity is of:  \textit{O(2n)} with n being the size of the matrix, so the number of space step we want, L=1 $\Delta$t=0.05 so we have 21 space steps. Meaning that a matrix twice larger will "only" take four time the requiered time.
+A linear system with a diagonal matrix can be solved with Thomas' algorithm, which is a really good linear system solving algorithm that works with diagonal matrix, it's time complexity is of:  \textit{O(2n)} with n being the size of the matrix, so the number of space step we want, L=1 $\Delta$t=0.05 so we have 21 space steps. Meaning that a matrix twice larger will "only" take four time the requiered time. ( A bit more explanation about Thomas' algorithm in the Appendix ).
 \paragraph{}
 Since the method relies on computing different time with a constant time step, a good interrogation would be: what is a good time step ? In theory, considering a stable method we can expect a more accurate solution the smaller the time step is.
 
@@ -157,7 +157,7 @@ As we said already, thoses numerical schemes are based on computing steps after 
 Let's take a look at Richardson method, it consists in derivating centrally the time and space.
 \begin{equation}\frac{\partial T}{\partial t} = D\frac{\partial^2T }{\partial x^2}
 \end{equation} 
-\begin{equation}\frac{f\binom{n+1}{i} - f\binom{n-}{i}}{2\Delta t} = D\frac{f\binom{n+1}{i+1} - 2f\binom{n+1}{i}+ f\binom{n}{i}}{\Delta x^{2}}
+\begin{equation}\frac{f\binom{n+1}{i} - f\binom{n-1}{i}}{2\Delta t} = D\frac{f\binom{n}{i+1} - 2f\binom{n}{i}+ f\binom{n}{i}}{\Delta x^{2}}
 \end{equation} 
 \begin{equation}f\binom{n+1}{i} = Cf\binom{n}{i+1} - C2f\binom{n}{i}+ Cf\binom{n}{i-1})+f\binom{n-1}{i} \text{ with }
 C = 2D\frac{\Delta t}{\Delta x^{2}}
@@ -172,8 +172,8 @@ Now that we have only one unknown we can figure it out. Since Richardson's metho
 I only plotted the three first steps because it shows that with only three steps we can clearly see that the methods is incoherent. Temperatures are supposed to go in a range of 100\textsuperscript{o}F to 300\textsuperscript{o}F. Which is clearly not the case here.
 
 \section{Stable Methods}
-Within the conditions defined in the original problem, Dufort-Frankel Laasonen and Crank-Nic
-holson methods are stable, which means that we do not have to fear for the errors to grow exponentially. We can even expected a better accuracy with time.
+Within the conditions defined in the original problem, Dufort-Frankel Laasonen and Crank-Nicholson methods are stable, which means that we do not have to fear for the errors to grow exponentially. We can even expected a better accuracy with time.
+\paragraph{Mathematic} The derivation of the original equation into the equations used in the schemes can be found in the appendix.
 \paragraph{results}
 The best way to compare the results are to compare the norms of their error matrix. For that, we can take a look at table 3.1 that compares the one norm , two norm, uniform norm and the computation time of the three methods.\\
 \begin{table}[ht]
@@ -199,14 +199,159 @@ Now that's we saw the theory and the results, let's take a look at the C++ imple
 \includegraphics[scale=0.5]{ClassDiagram.png}
 \caption{Class Diagramm}
 \end{figure}
+
+This is the class diagram of the application implementing the four schemes and the analytic solution.  The\textit{Solver} class uses \textit{Matrix} to store the solution of the problem where rows are time steps and columns are space steps. \textit{Solver} declares the virtual method \textit{computeSolution()} so that classes that inherit from it need to give an implementation of the solution for the  child class to be instanciated in a \textit{main} programm.\\
+The base class \textit{Solver} class holds all of the informations regarding the initial problem. Since it is attribut and not just hard-coded value in the code, all the child class are bounded to those value. Let's say that we want to see the solution with a surface temperature of 250\textsuperscript{o}F instead of 300\textsuperscript{o}F, we just have to instanciate the object with a different \textit{Tsur} value.
+\paragraph{functions}
+To print out the solution both in screen or in a file, I added the redefinition of the $"<<"$ operator. On screen, the matrix will print the solution value for time [0.1, 0.2, 0.3, 0.4, 0.5] and will write on a file in a way that would be exploitable by GNUPlot.
+I added the minus operator in the matrix class to be able to substract matrices in order to get the error matrix. \\When instanciated an object of a Solver child class, you have to respect some rules in order not to get exceptions. For example, it is impossible to have a \textit{dx} larger than a \textit{L} it would not make any sense, so the programm would raise an \textit{invalid\_argument} exception
+
+\chapter*{Conclusion}
+We had a problem that requiered a numerical approximation and four methods that would provide differents solutions with differents computation times. As we have seen the first thing to look at, is whther the method is stable or not to be sure to get "correct results". An other important aspect is the accuracy that we want to have, often the more accurate is a method, the more time consuming it will be, so we should look at the complexity of the method to know wether we can compute it in a reasonable time. Because all of the methods are numerical approch there will always be errors either implied by the method or by the limit of the machine, not being able to store the correct value of a number.\\
+In the scope of the valid solutions, there is not a better solution above the others for all cases, it all depends on the computation time and on the accuracy wanted.
 \begin{appendix}
 \clearpage
 \phantomsection
-This is the class diagram of the application implementing the four schemes and the analytic solution.  The\textit{Solver} class uses \textit{Matrix} to store the solution of the problem where rows are time steps and columns are space steps. \textit{Solver} declares the virtual method \textit{computeSolution()} so that classes that inherit from it need to give an implementation of the solution for the  child class to be instanciated in a \textit{main} programm.\\
-The base class \textit{Solver} class holds all of the informations regarding the initial problem. Since it is attribut and not just hard-coded value in the code, all the child class are bounded to those value. Let's say that we want to see the solution with a surface temperature of 250\textsuperscript{o}F instead of 300\textsuperscript{o}F, we just have to instanciate the object with a different \textit{Tsur} value.
-
-\chapter{documentation}
-
+\chapter{Mathematic derivation}
+\paragraph{Richardson}
+\begin{equation}\frac{\partial T}{\partial t} = D\frac{\partial^2T }{\partial x^2}
+\end{equation} 
+\begin{equation}\frac{f\binom{n+1}{i} - f\binom{n-1}{i}}{2\Delta t} = D\frac{f\binom{n}{i+1} - 2f\binom{n}{i}+ f\binom{n}{i}}{\Delta x^{2}}
+\end{equation} 
+\begin{equation}f\binom{n+1}{i} = Cf\binom{n}{i+1} - C2f\binom{n}{i}+ Cf\binom{n}{i-1})+f\binom{n-1}{i} \text{ with }
+C = 2D\frac{\Delta t}{\Delta x^{2}}
+\end{equation} 
+\paragraph{Dufort-Frankel}
+\begin{equation}\frac{\partial T}{\partial t} = D\frac{\partial^2T }{\partial x^2}
+\end{equation} 
+\begin{equation}\frac{f\binom{n+1}{i} - f\binom{n-1}{i}}{2\Delta t} = D\frac{f\binom{n}{i+1} - (f\binom{n+1}{i}+f\binom{n-1}{i})+f\binom{n}{i-1}}{\Delta x^{2}}
+\end{equation} 
+\begin{equation}
+f\binom{n+1}{i} = \frac{f\binom{n-1}{i}+2C(f\binom{n}{i+1}-f\binom{n-1}{i}+f\binom{n}{i-1})}{(1+2C)}\text{ with }
+C = 2D\frac{\Delta t}{\Delta x^{2}}
+\end{equation} 
+\paragraph{Laasonen}
+\begin{equation}\frac{\partial T}{\partial t} = D\frac{\partial^2T }{\partial x^2}
+\end{equation} 
+\begin{equation}\frac{f\binom{n+1}{i} - f\binom{n}{i}}{\Delta t} = D\frac{f\binom{n+1}{i+1} - 2f\binom{n+1}{i}+ f\binom{n+1}{i-1}}{\Delta x^{2}}
+\end{equation} 
+\begin{equation}f\binom{n}{i} = -Cf\binom{n+1}{i+1}+(1+2C)f\binom{n+1}{i}-Cf\binom{n+1}{i-1}
+   \text{ with }
+C = D\frac{\Delta t}{\Delta x^{2}}
+\end{equation}
+\begin{equation}
+\begin{pmatrix}
+1+2C & -C & 0 & ... & 0\\
+-C & 1+2C & -C& ... & 0\\
+...&...&...&...&...\\
+ 0 & ...& -C &1+2C & -C \\
+0 & ... &  0& -C & 1+2C
+\end{pmatrix}
+\begin{pmatrix}
+f\binom{n+1}{0}\\
+f\binom{n+1}{1}\\
+...\\
+...\\
+f\binom{n+1}{k}
+\end{pmatrix}
+=
+\begin{pmatrix}
+f\binom{n}{0}\\
+f\binom{n}{1}\\
+...\\
+...\\
+f\binom{n}{k}
+\end{pmatrix}
+\end{equation}
+\paragraph{Crank Nicolson}
+\begin{equation}\frac{\partial T}{\partial t} = D\frac{\partial^2T }{\partial x^2}
+\end{equation} 
+\begin{equation}\frac{f\binom{n+1}{i} - f\binom{n}{i}}{\Delta t} = D\frac{f\binom{n}{i+1} - 2f\binom{n}{i}+ f\binom{n}{i-1}}{2\Delta x^{2}}+D\frac{f\binom{n+1}{i+1} - 2f\binom{n+1}{i}+ f\binom{n+1}{i-1}}{2\Delta x^{2}}
+\end{equation} 
+\begin{equation}-Cf\binom{n+1}{i+1}+(1+2C)f\binom{n+1}{i}-Cf\binom{n+1}{i-1} = Cf\binom{n}{i+1}+(1-2C)f\binom{n}{i}+Cf\binom{n}{i-1}
+\end{equation}
+\begin{equation}
+\begin{pmatrix}
+1+2C & -C & 0 & ... & 0\\
+-C & 1+2C & -C& ... & 0\\
+...&...&...&...&...\\
+ 0 & ...& -C &1+2C & -C \\
+0 & ... &  0& -C & 1+2C
+\end{pmatrix}
+\begin{pmatrix}
+f\binom{n+1}{0}\\
+f\binom{n+1}{1}\\
+...\\
+...\\
+f\binom{n+1}{k}
+\end{pmatrix}
+= 
+\end{equation}
+\begin{equation}
+\begin{pmatrix}
+Cf\binom{n}{1}+(1-2C)f\binom{n}{0}+C*Tsurface\\
+Cf\binom{n}{2}+(1-2C)f\binom{n}{1}+Cf\binom{n}{0}\\
+...\\
+...\\
+C*Tsurface+(1-2C)f\binom{n}{k}+Cf\binom{n}{k-1}
+\end{pmatrix}
+   \text{ with }
+C = D\frac{\Delta t}{\Delta x^{2}}
+\end{equation}
 
 \end{appendix}
+\chapter{Thomas' Algorithm}
+Thomas' algorithm is an algorithm capable of solving linear system that can be stored in a diagonal matrix.
+If we take an example: \\$\begin{pmatrix}
+b & c & ... &&& 0\\
+a & b & c & ...&... & 0\\
+&&&&&\\
+&&&&&\\
+ 0 & &...& a&b & c \\
+0 &  &&...& a & b
+\end{pmatrix}
+\begin{pmatrix}
+x_{0}\\
+x_{1}\\
+...\\
+...\\
+...\\
+x_{k}
+\end{pmatrix}
+=
+\begin{pmatrix}
+d_{0}\\
+d_{1}\\
+...\\
+...\\
+...\\
+d_{k}
+\end{pmatrix}$\\
+then we changed the matrix to look like this, by substracting rows, having $c_{i}' = \frac{c_{i}}{b_{i}-a_{i}c_{i-1}'}$: \\$\begin{pmatrix}
+1 & c' & ... &&& 0\\
+0 & 1 & c' & ...&... & 0\\
+&&&&&\\
+&&&&&\\
+ 0 & &...& 0&1 & c \\
+0 &  &&...& 0 & 1
+\end{pmatrix}
+\begin{pmatrix}
+x_{0}\\
+x_{1}\\
+...\\
+...\\
+...\\
+x_{k}
+\end{pmatrix}
+=
+\begin{pmatrix}
+d_{0}'\\
+d_{1}'\\
+...\\
+...\\
+...\\
+d_{k}'
+\end{pmatrix}$\\
+At this point, we have a one unknown by equation, so the method is just working backward on the equation with $x_{i} = d_{i}'x_{i+1}$\\
+\paragraph{Complexity}About the complexity, if there is \textit{N} equations then the matrix will be of size \textit{N}. It's \textit{N} operations to transform the matrix and \textit{N} operations again to go backward. So the complexity is of \textit{O(2N)} 
 \end{document}

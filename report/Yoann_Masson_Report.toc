@@ -8,7 +8,7 @@
 \contentsline {paragraph}{Laasonen method}{4}
 \contentsline {paragraph}{}{5}
 \contentsline {section}{\numberline {2.2}Pratice}{5}
-\contentsline {paragraph}{one norm}{5}
+\contentsline {paragraph}{one norm}{6}
 \contentsline {paragraph}{two norm}{6}
 \contentsline {paragraph}{uniform norm}{6}
 \contentsline {paragraph}{}{6}
@@ -17,7 +17,15 @@
 \contentsline {paragraph}{Richardson case}{7}
 \contentsline {paragraph}{}{8}
 \contentsline {section}{\numberline {3.2}Stable Methods}{8}
+\contentsline {paragraph}{Mathematic}{8}
 \contentsline {paragraph}{results}{8}
 \contentsline {chapter}{\numberline {4}Implementation}{10}
 \contentsline {paragraph}{Class Diagram}{10}
-\contentsline {chapter}{\numberline {A}documentation}{12}
+\contentsline {paragraph}{functions}{11}
+\contentsline {chapter}{\numberline {A}Mathematic derivation}{13}
+\contentsline {paragraph}{Richardson}{13}
+\contentsline {paragraph}{Dufort-Frankel}{13}
+\contentsline {paragraph}{Laasonen}{13}
+\contentsline {paragraph}{Crank Nicolson}{14}
+\contentsline {chapter}{\numberline {B}Thomas' Algorithm}{15}
+\contentsline {paragraph}{Complexity}{15}
