@@ -32,9 +32,9 @@ Matrix Laasonen::computeSolution(){
 	for (int i = 0; i < nRows; i++) {
 		for (int j = 0; j < nCols+2 ; j++) {
 			if(j == 0 || j == nCols+1){
-				m[i][j] = 300;
+				m[i][j] = Tsur;
 			}else{
-				m[i][j] = 100;
+				m[i][j] = Tin;
 			}
 		}
 	}

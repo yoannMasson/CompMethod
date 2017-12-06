@@ -30,3 +30,4 @@ CrankNicolson.o: CrankNicolson.cpp
 	
 clean:
 	rm -rf *.o
+	rm test

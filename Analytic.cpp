@@ -31,7 +31,7 @@ Matrix Analytic::computeSolution(){
 		for (int j = 1; j < nCols-1; j++) {
 			sum = 0.0;
 			x += dx;
-			for(int z = 1; z<=100 ; z++){
+			for(int z = 1; z<=50 ; z++){
 				sum += exp(-D*(z*PI)*(z*PI)*t)*((1-(pow(-1,z)))/(z*PI))*sin(z*PI*x);
 			}
 			m[i][j] = Tsur+2*(Tin-Tsur)*sum;

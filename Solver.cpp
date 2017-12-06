@@ -1,8 +1,29 @@
 #include "Solver.h"
+#include <exception>
 #include <cmath>
 
 
+using namespace std;
 Solver::Solver(double dx, double dt, double L, double T, double D, double Tsur, double Tin){
+	//Handling errors through exception
+	if(dx < 0){
+		throw invalid_argument("dx should be positive");
+	}
+	if(dt < 0){
+		throw invalid_argument("dt should be positive");
+	}
+	if(L < 0){
+		throw invalid_argument("L should be positive");
+	}
+	if(T < 0){
+		throw invalid_argument("T should be positive");
+	}
+	if(L < dx){
+		throw invalid_argument("L should be equal or larger than dx");
+	}
+	if(T < dt){
+		throw invalid_argument("T should be equal or larger than dt");
+	}
 	(*this).dx = dx;
 	(*this).dt = dt;
 	(*this).L = L;

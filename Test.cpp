@@ -20,10 +20,17 @@ const double DT = 0.01;
 
 int main() {
 
-	clock_t start, end;
-	double elapsed;
-	ofstream f;
 	char choice('0');
+	double elapsed;
+
+	clock_t start, end;
+	ofstream f;
+
+	Analytic analytic(DX,DT,THICNESS,T,D,TSUR,TIN);//Use to compute errors
+	DufortFrankel dufortFrankel(DX,DT,THICNESS,T,D,TSUR,TIN);
+	Laasonen laasonen(DX,DT,THICNESS,T,D,TSUR,TIN);
+	Richardson richardson(DX,DT,THICNESS,T,D,TSUR,TIN);
+	CrankNicolson crankNicholson(DX,DT,THICNESS,T,D,TSUR,TIN);
 
 	f << fixed;
 	f << setprecision(2);
@@ -38,11 +45,6 @@ int main() {
 
 	Solver *solution;
 
-	Analytic analytic(DX,DT,THICNESS,T,D,TSUR,TIN);//Use to compute errors
-	DufortFrankel dufortFrankel(DX,DT,THICNESS,T,D,TSUR,TIN);
-	Laasonen laasonen(DX,DT,THICNESS,T,D,TSUR,TIN);
-	Richardson richardson(DX,DT,THICNESS,T,D,TSUR,TIN);
-	CrankNicolson crankNicholson(DX,DT,THICNESS,T,D,TSUR,TIN);
 	analytic.computeSolution();
 
 	switch (choice) {
@@ -90,7 +92,7 @@ int main() {
 
 
 
-	f << solution;
+	f << *solution;
 	f.close();
 	return 0;
 }
