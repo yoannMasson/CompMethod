@@ -1,0 +1,82 @@
+\hypertarget{classCrankNicolson}{}\section{Crank\+Nicolson Class Reference}
+\label{classCrankNicolson}\index{Crank\+Nicolson@{Crank\+Nicolson}}
+Inheritance diagram for Crank\+Nicolson\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classCrankNicolson}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCrankNicolson_a722060b8060158412b131179a1c484ce}{Crank\+Nicolson}} (double dx, double dt, double L, double T, double D, double Tsur, double Tin)
+\item 
+virtual \mbox{\hyperlink{classMatrix}{Matrix}} \mbox{\hyperlink{classCrankNicolson_a94af3b8a56ef40966ea2ccd2629c2eb2}{compute\+Solution}} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCrankNicolson_a722060b8060158412b131179a1c484ce}\label{classCrankNicolson_a722060b8060158412b131179a1c484ce}} 
+\index{Crank\+Nicolson@{Crank\+Nicolson}!Crank\+Nicolson@{Crank\+Nicolson}}
+\index{Crank\+Nicolson@{Crank\+Nicolson}!Crank\+Nicolson@{Crank\+Nicolson}}
+\subsubsection{\texorpdfstring{Crank\+Nicolson()}{CrankNicolson()}}
+{\footnotesize\ttfamily Crank\+Nicolson\+::\+Crank\+Nicolson (\begin{DoxyParamCaption}\item[{double}]{dx,  }\item[{double}]{dt,  }\item[{double}]{L,  }\item[{double}]{T,  }\item[{double}]{D,  }\item[{double}]{Tsur,  }\item[{double}]{Tin }\end{DoxyParamCaption})}
+
+Construcs a solver of the problem using Crank-\/\+Nicolson method 
+\begin{DoxyExceptions}{Exceptions}
+{\em invalid\+\_\+argument} & (\char`\"{}dx should be positive\char`\"{}) \\
+\hline
+{\em invalid\+\_\+argument} & (\char`\"{}dt should be positive\char`\"{}) \\
+\hline
+{\em invalid\+\_\+argument} & (\char`\"{}\+L should be positive\char`\"{}) \\
+\hline
+{\em invalid\+\_\+argument} & (\char`\"{}\+T should be positive\char`\"{}) \\
+\hline
+{\em invalid\+\_\+argument} & (\char`\"{}\+L should be equal or larger than dx\char`\"{}) \\
+\hline
+{\em invalid\+\_\+argument} & (\char`\"{}\+T should be equal or larger than dt\char`\"{}) \\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyParams}{Parameters}
+{\em dx} & double. distance between two space steps \\
+\hline
+{\em dt} & double. time between two time steps \\
+\hline
+{\em L} & double. width of the 1D material to consider \\
+\hline
+{\em T} & double. Total time of the considerated problem \\
+\hline
+{\em D} & double. Diffusion coefficient of the material \\
+\hline
+{\em Tsur} & double. The temperature that will be applied on the boundaries of the material \\
+\hline
+{\em Tin} & double. The initial temperature of the material \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classCrankNicolson_a94af3b8a56ef40966ea2ccd2629c2eb2}\label{classCrankNicolson_a94af3b8a56ef40966ea2ccd2629c2eb2}} 
+\index{Crank\+Nicolson@{Crank\+Nicolson}!compute\+Solution@{compute\+Solution}}
+\index{compute\+Solution@{compute\+Solution}!Crank\+Nicolson@{Crank\+Nicolson}}
+\subsubsection{\texorpdfstring{compute\+Solution()}{computeSolution()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMatrix}{Matrix}} Crank\+Nicolson\+::compute\+Solution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Compute the solution and return it. This method is the Crank-\/\+Nicolson method applied to the heat diffusion equation problem \begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classMatrix}{Matrix}}. The computed matrix, can also be accesed through \mbox{\hyperlink{classSolver_aafe88ce4130c001052e5d93c1681f90f}{get\+Computed\+Solution()}} 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classSolver_aafe88ce4130c001052e5d93c1681f90f}{get\+Computed\+Solution()}} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classSolver_a0f4ecfaed825407019995b5176e25748}{Solver}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Crank\+Nicolson.\+h\item 
+Crank\+Nicolson.\+cpp\end{DoxyCompactItemize}

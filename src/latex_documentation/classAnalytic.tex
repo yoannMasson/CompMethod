@@ -1,0 +1,82 @@
+\hypertarget{classAnalytic}{}\section{Analytic Class Reference}
+\label{classAnalytic}\index{Analytic@{Analytic}}
+Inheritance diagram for Analytic\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classAnalytic}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classAnalytic_a22578fb39f290a77a0a9bacfe85c6406}{Analytic}} (double dx, double dt, double L, double T, double D, double Tsur, double Tin)
+\item 
+virtual \mbox{\hyperlink{classMatrix}{Matrix}} \mbox{\hyperlink{classAnalytic_aaa59a993d9c1a9b9c5b581f8f3e9c5b3}{compute\+Solution}} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classAnalytic_a22578fb39f290a77a0a9bacfe85c6406}\label{classAnalytic_a22578fb39f290a77a0a9bacfe85c6406}} 
+\index{Analytic@{Analytic}!Analytic@{Analytic}}
+\index{Analytic@{Analytic}!Analytic@{Analytic}}
+\subsubsection{\texorpdfstring{Analytic()}{Analytic()}}
+{\footnotesize\ttfamily Analytic\+::\+Analytic (\begin{DoxyParamCaption}\item[{double}]{dx,  }\item[{double}]{dt,  }\item[{double}]{L,  }\item[{double}]{T,  }\item[{double}]{D,  }\item[{double}]{Tsur,  }\item[{double}]{Tin }\end{DoxyParamCaption})}
+
+Construcs an analyic object 
+\begin{DoxyExceptions}{Exceptions}
+{\em invalid\+\_\+argument} & (\char`\"{}dx should be positive\char`\"{}) \\
+\hline
+{\em invalid\+\_\+argument} & (\char`\"{}dt should be positive\char`\"{}) \\
+\hline
+{\em invalid\+\_\+argument} & (\char`\"{}\+L should be positive\char`\"{}) \\
+\hline
+{\em invalid\+\_\+argument} & (\char`\"{}\+T should be positive\char`\"{}) \\
+\hline
+{\em invalid\+\_\+argument} & (\char`\"{}\+L should be equal or larger than dx\char`\"{}) \\
+\hline
+{\em invalid\+\_\+argument} & (\char`\"{}\+T should be equal or larger than dt\char`\"{}) \\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyParams}{Parameters}
+{\em dx} & double. distance between two space steps \\
+\hline
+{\em dt} & double. time between two time steps \\
+\hline
+{\em L} & double. width of the 1D material to consider \\
+\hline
+{\em T} & double. Total time of the considerated problem \\
+\hline
+{\em D} & double. Diffusion coefficient of the material \\
+\hline
+{\em Tsur} & double. The temperature that will be applied on the boundaries of the material \\
+\hline
+{\em Tin} & double. The initial temperature of the material \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classAnalytic_aaa59a993d9c1a9b9c5b581f8f3e9c5b3}\label{classAnalytic_aaa59a993d9c1a9b9c5b581f8f3e9c5b3}} 
+\index{Analytic@{Analytic}!compute\+Solution@{compute\+Solution}}
+\index{compute\+Solution@{compute\+Solution}!Analytic@{Analytic}}
+\subsubsection{\texorpdfstring{compute\+Solution()}{computeSolution()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMatrix}{Matrix}} Analytic\+::compute\+Solution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Compute the solution and return it. This method is the analytical solution of the heat diffusion equation problem \begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classMatrix}{Matrix}}. The computed matrix, can also be accesed through \mbox{\hyperlink{classSolver_aafe88ce4130c001052e5d93c1681f90f}{get\+Computed\+Solution()}} 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classSolver_aafe88ce4130c001052e5d93c1681f90f}{get\+Computed\+Solution()}} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classSolver_a0f4ecfaed825407019995b5176e25748}{Solver}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Analytic.\+h\item 
+Analytic.\+cpp\end{DoxyCompactItemize}

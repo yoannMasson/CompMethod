@@ -1,5 +1,6 @@
 \documentclass[12pt, a4paper]{report}
 \usepackage {graphicx,booktabs, gensymb,amsmath,appendix}
+\usepackage[final]{pdfpages} 
 
 \title{Study of multiple Heat Diffusion schemes through a C++ implementation}
 \author{Yoann Masson \\ Student in Software Engineering at Cranfield University}
@@ -16,7 +17,19 @@
 \begin{abstract}
 This report is about studying 4 schemes to implement a numerical solution of the heat diffusion equation in a 1D material through time. The equation is given by the following formula: \begin{equation}\frac{\partial T}{\partial t} = D\frac{\partial^2T }{\partial x^2}
 \end{equation} 
-The constraint are the following, a one foot long wall at an initial temperature of 100\degree F is being subject to a rise of its surface temperature to 300\degree F. The diffusivity D of the material is 0.1ft\textsuperscript{2}/hr. We will study the rise of the temperature of the material with time t = { 0.0, 0.1, 0.2, 0.3, 0.4, 0.5}.
+During this paper we will see that implicit methods are more accurate and more time consumming than explicit methods. The heat diffusion is one of the "solved" phenomena, meaning that we know how to model it and that is how we are able to determine the accuracy of a method. \\
+Schemes relies on computing steps after steps that relie on each other making the time steps size a big matter in this subject. The more steps there is, the more accurate is the method, in condition that the method is stable. This matter will be treated by comparing the same schemes with differents time steps' size.
+
+
+\end{abstract}
+
+
+\tableofcontents
+
+\chapter*{Introduction}
+The simulation of physics phenomena is one of the many uses of modern computer. Thoses simulations are based on the exact formula or on approximations based on observations of the phenomenas' behaviour.\\
+Because the phenomena often depends on many parameters, the analytic equation is not often known. So that, the only way the model a phenomena is to try to approch it with differents schemes based on observations of the initial conditions. However, simulations has very different accuracy and time computing meaning that every phenomena have to be treated separatly.\\
+In this report we will deal with the heat diffusion problem with the following constraints: a one foot long wall at an initial temperature of 100\degree F is being subject to a rise of its surface temperature to 300\degree F. The diffusivity D of the material is 0.1ft\textsuperscript{2}/hr. We will study the rise of the temperature of the material with time t = { 0.0, 0.1, 0.2, 0.3, 0.4, 0.5}.
 \\
 We will see four different schemes, each of them is providing a numerical solution. Those schemes are split into two categories:
 \begin{itemize}
@@ -34,12 +47,6 @@ We will see four different schemes, each of them is providing a numerical soluti
 \end{itemize}
 
 The four methods will give four different solutions that we will compare with the known analytical solution. Firstly the discussion will be oriented toward the behaviour of the errors and secondly we will discuss about the C++ solution that I provided.
-\end{abstract}
-
-
-\tableofcontents
-
-
 \chapter{The analytical solution}
 \section{The expected behaviour}
 By chance, the heat diffusion equation has been solved and we know the temperature at the given time \textit{t} and space \textit{x}, with the given formula: \begin{equation}
@@ -52,7 +59,8 @@ If we  plot the result for the wanted times, which are from time = 0 to time = 0
 \caption{Analytical solution}
 \end{figure}
 \\
-As expected as the time flows the temperature is rising from the surface to the center. This is usefull to understand the heat diffusion behaviour. We will later use the data, used to make this plot, to compare with the other solution. This plot has been computed with a \textit{m} value of 50, which we will discuss in the next section.
+On the horizontale axis is the space and on the vertical is the temperature. Each line represents the temperature of the wall at a given time.
+As expected as the time flows the temperature is rising from the surface to the center. This is usefull to understand the heat diffusion behaviour. We will later use the data, used to make this plot, to compare with the other solutions. This plot has been computed with a \textit{m} value of 50, which we will discuss in the next section.
 
 
 \section{Study of \textit{m}}
@@ -60,9 +68,9 @@ As expected as the time flows the temperature is rising from the surface to the 
 \begin{equation}
 \sum_{1}^{\infty}e^{-D(m\pi/L)^{2}t}\frac{1-(-1)^{m}}{m\pi}sin(\frac{m\pi x}{L})
 \end{equation}
-When considering the analytical equation of the heat diffusion, we can see that there is a sum to the infinty involving the term \textit{m}, which is of course not computable since we do not have an infinit time/space ressources to compute. In computer science, we can consider stopping the computation of the sum if the steps are becoming smaller and smaller, to the point where it is not use anymore to continue computing steps.
+When considering the analytical equation of the heat diffusion, we can see that there is a sum to the infinty involving the term \textit{m}, which is of course not computable since we do not have an infinit time/space ressources to compute. In computer science, we can consider stopping the computation of the sum if the steps are becoming smaller and smaller, to the point where it is not use anymore to continue computing steps of the sum.
 \paragraph{}
-In this case, we are dealing with numbers in a range of 100 to 300, so I considered that an error less than 10\textsuperscript{-4} is acceptable. To know when the \textit{m} value is to be stopped I printed out the same time and space with different m value. Time is t = 0.01,0.25,0.5 and space is x = 0.5.
+In this case, we are dealing with numbers in a range of 100 to 300, so I considered that an error less than 10\textsuperscript{-4} is acceptable. To know when the \textit{m} value is to be stopped I printed out the temperature for the same time and space with a different m value. Time is t = 0.01,0.25,0.5 and space is x = 0.5.
 \begin{table}[ht]
 \centering
 \begin{tabular}{c c c c}
@@ -79,7 +87,8 @@ In this case, we are dealing with numbers in a range of 100 to 300, so I conside
 \end{tabular}
 \caption{Temperature by \textit{m} value}
 \end{table}\\
-The outcome of those results is that in this example, we don't need such a high value for \textit{m}, we can see that values stop varying after \textit{m} > 49. If we want an error less than 10\textsuperscript{-4}, \textit{m} = 50 is enough. Thanks to that, we know that we don't have to waste computer ressources and time on computing the analytical solution with a higher \textit{m} value.
+
+The outcome of those results is that in this example, we don't need such a high value for \textit{m}, we can see that values stop varying after \textit{m} $>$ 49. A too small \textit{m} value is not accurate, at time \textit{t} = 0.01 the temperature is equal to 47\textsuperscript{o}F when it is supposed to be at least 100\textsuperscript{o}F. If we want an error less than 10\textsuperscript{-4}, \textit{m} = 50 is enough. Thanks to that, we know that we don't have to waste computer ressources and time on computing the analytical solution with a higher \textit{m} value.
 
 
 \chapter{Laasonen method,\\ time step size and computation time}
@@ -120,12 +129,12 @@ f\binom{n}{k}
 \end{pmatrix}
 \end{equation}
 With the above equations, we can see that we need to solve a linear system for each time step. Linear system can be really time and ressources consumming for a computer. That's why we need a good algorithm to resolve this linear system, if we take a look at the left matrix we can see that it is a diagonal matrix.\\
-A linear system with a diagonal matrix can be solved with Thomas' algorithm, which is a really good linear system solving algorithm that works with diagonal matrix, it's time complexity is of:  \textit{O(2n)} with n being the size of the matrix, so the number of space step we want, L=1 $\Delta$t=0.05 so we have 21 space steps. Meaning that a matrix twice larger will "only" take four time the requiered time. ( A bit more explanation about Thomas' algorithm in the Appendix ).
+A linear system with a diagonal matrix can be solved with Thomas' algorithm, which is a really good linear system solving algorithm that works with diagonal matrix, it's time complexity is of:  \textit{O(2n)} with n being the size of the matrix, so the number of space step. L=1 $\Delta$t=0.05 so we have 21 space steps. Meaning that a matrix twice larger will "only" take four time the requiered time. ( A bit more explanation about Thomas' algorithm in the Appendix ).
 \paragraph{}
 Since the method relies on computing different time with a constant time step, a good interrogation would be: what is a good time step ? In theory, considering a stable method we can expect a more accurate solution the smaller the time step is.
 
 \section{Pratice} 
-Having a smaller and smaller difference between time steps allows us to have a better precision on each row, but if we decrease the time step we increase the number of linear system we need to solve. So I ran 4 simulations with various value of $\Delta$t, to compare the results. Let's see the norms of the errors matrices, the errors matrices is the Laasonen resulting matrix minus the analytical matrix:
+Having smaller time steps allows us to have a better precision on each row, but if we decrease the time step we increase the number of linear system we need to solve. So I ran 4 simulations with various value of $\Delta$t, to compare the results. Let's see the norms of the errors matrices, the errors matrices is the Laasonen resulting matrix minus the analytical matrix:
 \begin{table}[ht]
 \centering
 \begin{tabular}{c c c c c c}
@@ -141,10 +150,10 @@ $\Delta$t&Number of time step&One norm&Two norm&uniform norm&computing time\\
 \end{table} \\
 Increasing the number of rows in the matrix by decreasing the time step size affects the one and two norms. Because the one norm is the highest error among the sums of error in each column and the two norm is just the sum of all errors. So more rows equals to possibly a worst one and two norms\\
 
-\paragraph{one norm} The one norm is about errors in one column, so for $\Delta$t = 0.1, we can say that on average the "worst" column has an error of 50.26/5=10.05. Considering the fact that we are dealing with numbers in range of 100-300, this is almost a 10\% error on average. Compared to the $\Delta$t = 0.01 that has an average of 77.01/50 = 1.5 error, that's about 1\%error.\\
+\paragraph{one norm} The one norm is about errors in one column, so for $\Delta$t = 0.1, we can say that on average the "worst" column has an error of 50.26/5=10.05. Considering the fact that we are dealing with numbers in range of 100-300, this is almost a 10\% error on average by row. Compared to the $\Delta$t = 0.01 that has an average of 77.01/50 = 1.5 error, that's about 1\%error on average by row.\\
 According to the one norm, decreazing the size of time steps is a good idea.
 
-\paragraph{two norm} The two norm is just the square root of the sum errors, so increasing the numbers of rows in the matrix should increase the two norm, which is not the case. Between $\Delta$t = 0.1 and $\Delta$t = 0.05, we double the matrix size but the sum of errors is even smaller meaning that we have fewer errors overall.
+\paragraph{two norm} The two norm is just the square root of the sum of the square of errors, so increasing the numbers of rows in the matrix should increase the two norm, which is not the case. Between $\Delta$t = 0.1 and $\Delta$t = 0.05, we double the matrix size but the sum of errors is even smaller meaning that we have a lot less errors overall.
 
 \paragraph{uniform norm} The uniform norm is the highest number among the sum of rows. Increasing the number of rows does not affect the behaviour of this number, so if this decreases with a smaller time step size, it means that the method is more and more accurate. By comparing the worst uniform norm 154.56 and the best 36.26,  we can say that the worst row with a $\Delta$t = 0.1 is nearly six times less accurate than the worst row with a $\Delta$t = 0.01.
 
@@ -152,7 +161,7 @@ According to the one norm, decreazing the size of time steps is a good idea.
 
 \chapter{Methods Result}
 \section{Unstable Method}
-As we said already, thoses numerical schemes are based on computing steps after steps using the principe of derivatives. That is why, the more steps we have the more accurate results we have because the $\Delta$ in $f(x+\Delta x)$is smaller. This is introducing errors and we must be sure that the error are not comulating. In order to do this, we study the stability of the methods on the given problem. This means that every method does not work on every problem. Methods can be stable under certains conditions mostly relying on a $\Delta$x-$\Delta$t ratio. They can also be unconditionally stable/unstable meaning that for any $\Delta$x-$\Delta$t, the method will (or will not) work at any case.
+As we said already, thoses numerical schemes are based on computing steps after steps using the principe of decomposing $\frac{\partial T}{\partial t}$ into something that looks like this $\frac{f\binom{n+1}{i} - f\binom{n-1}{i}}{2\Delta t}$. Doing this implies errors because in theory this is correct for the smallest $\Delta t$ possible . That is why, the more steps we have the more accurate results we have because the $\Delta$ in $f(x+\Delta x)$is smaller. This is introducing errors and we must be sure that the errors are not comulating. In order to do this, we study the stability of the methods on the given problem. This means that every method does not work on every problem. Methods can be stable under certains conditions mostly relying on a $\Delta$x-$\Delta$t ratio. They can also be unconditionally stable/unstable meaning that for any $\Delta$x-$\Delta$t, the method will (or will not) work at any case.
 \paragraph{Richardson case}
 Let's take a look at Richardson method, it consists in derivating centrally the time and space.
 \begin{equation}\frac{\partial T}{\partial t} = D\frac{\partial^2T }{\partial x^2}
@@ -169,11 +178,11 @@ Now that we have only one unknown we can figure it out. Since Richardson's metho
 \caption{Richardson solution}
 \end{figure}
 \paragraph{}
-I only plotted the three first steps because it shows that with only three steps we can clearly see that the methods is incoherent. Temperatures are supposed to go in a range of 100\textsuperscript{o}F to 300\textsuperscript{o}F. Which is clearly not the case here.
+I only plotted the three first steps because it shows that with only three steps we can clearly see that the methods is incoherent. Temperatures are supposed to go in a range of 100\textsuperscript{o}F to 300\textsuperscript{o}F. Which is clearly not the case here with only three time steps computed.
 
 \section{Stable Methods}
 Within the conditions defined in the original problem, Dufort-Frankel Laasonen and Crank-Nicholson methods are stable, which means that we do not have to fear for the errors to grow exponentially. We can even expected a better accuracy with time.
-\paragraph{Mathematic} The derivation of the original equation into the equations used in the schemes can be found in the appendix.
+\paragraph{Mathematic} The derivation of the original equation into the equations used in those schemes can be found in the appendix.
 \paragraph{results}
 The best way to compare the results are to compare the norms of their error matrix. For that, we can take a look at table 3.1 that compares the one norm , two norm, uniform norm and the computation time of the three methods.\\
 \begin{table}[ht]
@@ -188,7 +197,7 @@ Dufort-Frankel & 85.61 & 74.47 & 82.82 & 0.93ms\\
 \end{tabular}
 \caption{Accuracy of stable methods}
 \end{table}\\
-Looking at those results, we can clearly see the superiority of the implicit methods ( Crank-Nicolson \& Laasonen ) over the Dufort-Frankel method. The norms in this table represents the sum of errors, so the fewer errors the best a method is, regarding the considered norm. However, the computation time for Dufort-Frankel is far better. Crank-Nicolson seems to be the better deal here: the sum of the error of the least accurate time step is 20\textsuperscript{o}F. So considering 21 space step, that's a 1\textsuperscript{o}F error by number in average, which is acceptable. The second norm of Crank-Nicolson (14.48) that somehow represents the error in the all result matrix is also the best.\\
+Looking at those results, we can clearly see the superiority of the implicit methods ( Crank-Nicolson \& Laasonen ) over the Dufort-Frankel method. The norms in this table represents the sum of errors, so the fewer errors the best a method is, regarding the considered norm. However, the computation time for Dufort-Frankel is far better. Crank-Nicolson seems to be the better deal here: the sum of the error of the least accurate time step is 20\textsuperscript{o}F. So considering 21 space step, that's a 1\textsuperscript{o}F error by number in average, which is acceptable. The second norm of Crank-Nicolson (14.48), that somehow represents the error in the all result matrix, is also the best.\\
 The outcome of this table is that if we have enough time we should consider using Crank-Nicolson since it is the more accurate method but if if we don't have enough computation time we should consider using Dufort Frankel. Dufort Frankel is a bit less accurate but is way faster because its computation only requires solving one equation and not a linear system.
 
 \chapter{Implementation}
@@ -200,14 +209,14 @@ Now that's we saw the theory and the results, let's take a look at the C++ imple
 \caption{Class Diagramm}
 \end{figure}
 
-This is the class diagram of the application implementing the four schemes and the analytic solution.  The\textit{Solver} class uses \textit{Matrix} to store the solution of the problem where rows are time steps and columns are space steps. \textit{Solver} declares the virtual method \textit{computeSolution()} so that classes that inherit from it need to give an implementation of the solution for the  child class to be instanciated in a \textit{main} programm.\\
-The base class \textit{Solver} class holds all of the informations regarding the initial problem. Since it is attribut and not just hard-coded value in the code, all the child class are bounded to those value. Let's say that we want to see the solution with a surface temperature of 250\textsuperscript{o}F instead of 300\textsuperscript{o}F, we just have to instanciate the object with a different \textit{Tsur} value.
+This is the class diagram of the application implementing the four schemes and the analytic solution.  The\textit{Solver} class uses \textit{Matrix} to store the solution of the problem where rows are time steps and columns are space steps. \textit{Solver} declares the virtual method \textit{computeSolution()} so that classes that inherit from it need to give an implementation of \textit{computeSolution()} if they wish to be instanciated in a \textit{main} programm.\\
+The base class \textit{Solver} class holds all of the informations regarding the initial problem. Since it is attribut and not just hard-coded value in the code, all the child class are bounded to those values. Let's say that we want to see the solution with a surface temperature of 250\textsuperscript{o}F instead of 300\textsuperscript{o}F, we just have to instanciate the object with a different \textit{Tsur} value.
 \paragraph{functions}
 To print out the solution both in screen or in a file, I added the redefinition of the $"<<"$ operator. On screen, the matrix will print the solution value for time [0.1, 0.2, 0.3, 0.4, 0.5] and will write on a file in a way that would be exploitable by GNUPlot.
 I added the minus operator in the matrix class to be able to substract matrices in order to get the error matrix. \\When instanciated an object of a Solver child class, you have to respect some rules in order not to get exceptions. For example, it is impossible to have a \textit{dx} larger than a \textit{L} it would not make any sense, so the programm would raise an \textit{invalid\_argument} exception
 
 \chapter*{Conclusion}
-We had a problem that requiered a numerical approximation and four methods that would provide differents solutions with differents computation times. As we have seen the first thing to look at, is whther the method is stable or not to be sure to get "correct results". An other important aspect is the accuracy that we want to have, often the more accurate is a method, the more time consuming it will be, so we should look at the complexity of the method to know wether we can compute it in a reasonable time. Because all of the methods are numerical approch there will always be errors either implied by the method or by the limit of the machine, not being able to store the correct value of a number.\\
+We had a problem that requiered a numerical approximation and four methods that would provide differents solutions with differents computation times. As we have seen the first thing to look at, is wether the method is stable or not to be sure to get "correct results". An other important aspect is the accuracy that we want to have, often the more accurate is a method, the more time consuming it will be, so we should look at the complexity of the method to know wether we can compute it in a reasonable time. Because all of the methods are numerical approch there will always be errors either implied by the method or by the limit of the machine, not being able to store the correct value of a number.\\
 In the scope of the valid solutions, there is not a better solution above the others for all cases, it all depends on the computation time and on the accuracy wanted.
 \begin{appendix}
 \clearpage
@@ -299,7 +308,6 @@ C*Tsurface+(1-2C)f\binom{n}{k}+Cf\binom{n}{k-1}
 C = D\frac{\Delta t}{\Delta x^{2}}
 \end{equation}
 
-\end{appendix}
 \chapter{Thomas' Algorithm}
 Thomas' algorithm is an algorithm capable of solving linear system that can be stored in a diagonal matrix.
 If we take an example: \\$\begin{pmatrix}
@@ -354,4 +362,9 @@ d_{k}'
 \end{pmatrix}$\\
 At this point, we have a one unknown by equation, so the method is just working backward on the equation with $x_{i} = d_{i}'x_{i+1}$\\
 \paragraph{Complexity}About the complexity, if there is \textit{N} equations then the matrix will be of size \textit{N}. It's \textit{N} operations to transform the matrix and \textit{N} operations again to go backward. So the complexity is of \textit{O(2N)} 
+\end{appendix}
+\chapter{Documentation}
+\section{documentation} Here you can see the latex-pdf documentation generated by Doxygen. With the source code, there is the html documentation that you might find more attractive.
+\includepdf[pages=1-42]{refman.pdf}
+
 \end{document}
